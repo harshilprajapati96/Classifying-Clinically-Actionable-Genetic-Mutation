@@ -1,0 +1,123 @@
+\documentclass[a4paper, 11pt]{article}
+%% Math Support
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumitem}
+%independent sign
+\usepackage{rotating}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+%% antifloat image
+\usepackage{float}
+%[H] for fix 
+%[htbp] for float
+\usepackage{authblk}
+\usepackage{cite}
+%% Graphics Support
+\usepackage{listings}%begin MATLAB 
+\usepackage{color}
+\usepackage{placeins}
+\setcounter{MaxMatrixCols}{21}
+\footnotesize
+\setlength{\arraycolsep}{2.5pt}
+\medmuskip = 1mu
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+language=MATLAB,
+aboveskip=3mm,
+belowskip=3mm,
+showstringspaces=false,
+columns=flexible,
+basicstyle={\small\ttfamily},
+numbers=none,
+numberstyle=\tiny\color{gray},
+keywordstyle=\color{blue},
+commentstyle=\color{dkgreen},
+stringstyle=\color{mauve},
+breaklines=true,
+breakatwhitespace=true,
+tabsize=3
+}%end MATLAB 
+% lstinputlisting
+
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[width=\linewidth]{sincom.png}
+%   \caption{Comparing Polynomial and Taylor Approximation with Sine function}
+%    \label{figure:sincom}
+%   \end{figure}
+% \FloatBarrier
+
+\setlength\parindent{0pt}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{graphicx}  % png/jpg support
+\usepackage{fullpage} % changes the margin
+\title{Project Summary: Document Classifier}
+\author[1]{Arjun Patel}
+\author[1]{Harshil Prajapati}
+\author[1]{Bowen Song}
+\affil[1]{Department of Electrical and Computer Engineering, Boston University}
+% \author{Arjun Patel\\
+% Boston University\\
+% 8 St. Mary's st,\\
+% {\tt\small adpatel@bu.edu}
+% % For a paper whose authors are all at the same institution,
+% % omit the following lines up until the closing ``}''.
+% % Additional authors and addresses can be added with ``\and'',
+% % just like the second author.
+% % To save space, use either the email address or home page, not both
+% \and
+% Harshil Prajapati\\
+% {\tt\small harshil@bu.edu}
+% \and
+% Bowen Song\\
+% {\tt\small sbowen@bu.edu}
+% }
+\begin{document}
+\maketitle
+\section{Problem Definition}
+This project explores machine learning algorithms for document classification. The specific application of the project is sensitive to datasets. The contribution of the project is to compare and contrast algorithm performances based on results and computation efficiency with respect to different types of datasets.
+\section{Literature Review}
+\section{Proposed Work}
+The project concerns algorithms including:
+\begin{itemize}
+\item Bag-of-words model with Naive Bayes assumption
+\item Multi-class logistic regression (also known as maximum entropy classifier)
+\item Sensing-aware kernel SVM ~\cite{svm_2014}
+\item Unigram model
+\item Markov model.
+\end{itemize}
+The bag-of-words model with Naive Bayes assumption is considered the baseline for prediction accuracy. This project also includes stop-words filtering based on stop-words vocabulary list and term frequency–inverse document frequency (tf–idf) in attempt to improve performances for each model. The project learns from different datasets; the overview of the datasets is included in later chapters. In addition to discussing algorithm performances, the project also concerns the importance of preserving word ordering within a document with respect to classification accuracy. The project attempts to explore correlations between word vectors generated from Google word2vec algorithm and its occurrences. 
+\subsection{Model and Algorithms}
+
+\subsection{Code and Dataset}
+\subsection{Minimum Achieviable Plan}
+\section{Conclusion}
+\section*{Division of Labor}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\nocite{*}
+{\small
+\bibliographystyle{IEEEtran}
+\bibliography{EC503ref}
+}
+\end{document}
