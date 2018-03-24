@@ -83,12 +83,20 @@ tabsize=3
 \section{Problem Definition}
 This project explores machine learning algorithms for document classification. The specific application of the project is sensitive to datasets. The contribution of the project is to compare and contrast algorithm performances based on results and computation efficiency with respect to different types of datasets.
 \section{Literature Review}
+Classification of documents is a traditional problem where ususally a bag-of-words approach is to extract features and are used for supervised classificationusin Naive Bayes or Support Vector Machine (SVM) algorithms \cite{sachan2018investigating}. In classical papers, the order of words is ignored but recent study shows use of Convolutional Neural Network (CNN) \cite{kim2014convolutional} to get improved results.\\
+
+Due to the size of documents, different techniques like topological spaces for developing Information Retrieval System (IRS) \cite{parlak2018feature},  Ontology-Based Feature Vector Generation \cite{elhadad2018novel} have been developed which can effectively reduce the computation while extracting features that aids in classification. Kernel methods (KMs) are an effective alternative to explicit feature extraction. Another way to efficiently extract features is based on finding conditional probability using n-gram models \cite{furnkranz1998study} .
+
+More over the traditional supervised learning techniques, research has been done to improve prediction in k-NN by using pyramidal decomposition \cite{heroux1998classification},  skip-gram and paragraph vectors-distributed bag of words (PV-DBOW) with multiple discriminant analysis \cite{lauren2018discriminant}, expansion method and Powerset-label mechanism for the short hierarchical classification using the Support Vector Machine (SVM) classifier \cite{salih2018term}, Bayes-optimum decision with the maximum margin principle yields kernels for SVMs \cite{ding2014sensing}.
+
+
+
 \section{Proposed Work}
 The project concerns algorithms including:
 \begin{itemize}
 \item Bag-of-words model with Naive Bayes assumption
 \item Multi-class logistic regression (also known as maximum entropy classifier)
-\item Sensing-aware kernel SVM ~\cite{svm_2014}
+\item Sensing-aware kernel SVM \cite{ding2014sensing}.
 \item Unigram model
 \item Markov model.
 \end{itemize}
@@ -96,6 +104,8 @@ The bag-of-words model with Naive Bayes assumption is considered the baseline fo
 \subsection{Model and Algorithms}
 
 \subsection{Code and Dataset}
+We have multiple datasets in which we want to implement these algorithms. Initially we want to start by using the news group data set, due to previous use of the data set. This dataset has 20 class, 11,314 training documents and 7,532 test documents. The dataset is already preprocessed in a form which can be used. It is broken down into document ID, word ID and word count. Once we test the algorithms on the news group data set, we will test it on another dataset, Reuters21578 but will be using the ModApt version, which is a smaller overall dataset from the Reuters21578 dataset \cite{dataset}. In this dataset there are 5,945 training documents and 2,347 testing documents. This dataset has also been preprocessed. Finally we want to run these algorithms on the dataset obtained from a Kaggle project, Personalized Medicine: Redefining Cancer Treatment \cite{kaggledataset}. The data has not been preprocessed so we have the raw files. The data we have is currently, a text file of each paper. There 3,320 documents for training and 5,667 documents for testing. There are more test documents due to Kaggle adding machine generated documents, but these machines generated documents can be removed and the test dataset will be down to 987 documents. There is a total of 9 classes in this dataset. But the biggest job with this dataset is all the preprocessing has to be done by us and made into a usable form, like the other datasets. 
+
 \subsection{Minimum Achieviable Plan}
 \section{Conclusion}
 \section*{Division of Labor}
