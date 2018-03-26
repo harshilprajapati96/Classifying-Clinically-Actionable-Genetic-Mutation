@@ -25,6 +25,27 @@
 D.~S. Sachan, M.~Zaheer, and R.~Salakhutdinov, ``Investigating the working of
   text classifiers,'' \emph{arXiv preprint arXiv:1801.06261}, 2018.
 
+\bibitem{maes1995agents}
+P.~Maes, ``Agents that reduce work and information overload,'' in
+  \emph{Readings in Human--Computer Interaction}.\hskip 1em plus 0.5em minus
+  0.4em\relax Elsevier, 1995, pp. 811--821.
+
+\bibitem{deerwester1990indexing}
+S.~Deerwester, S.~T. Dumais, G.~W. Furnas, T.~K. Landauer, and R.~Harshman,
+  ``Indexing by latent semantic analysis,'' \emph{Journal of the American
+  society for information science}, vol.~41, no.~6, p. 391, 1990.
+
+\bibitem{hofmann1999probabilistic}
+T.~Hofmann, ``Probabilistic latent semantic analysis,'' in \emph{Proceedings of
+  the Fifteenth conference on Uncertainty in artificial intelligence}.\hskip
+  1em plus 0.5em minus 0.4em\relax Morgan Kaufmann Publishers Inc., 1999, pp.
+  289--296.
+
+\bibitem{blei2003latent}
+D.~M. Blei, A.~Y. Ng, and M.~I. Jordan, ``Latent dirichlet allocation,''
+  \emph{Journal of machine Learning research}, vol.~3, no. Jan, pp. 993--1022,
+  2003.
+
 \bibitem{kim2014convolutional}
 Y.~Kim, ``Convolutional neural networks for sentence classification,''
   \emph{arXiv preprint arXiv:1408.5882}, 2014.
