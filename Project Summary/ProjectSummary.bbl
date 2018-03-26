@@ -89,6 +89,10 @@ W.~Ding, P.~Ishwar, V.~Saligrama, and W.~C. Karl, ``Sensing-aware kernel svm,''
   International Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
   2014, pp. 2947--2951.
 
+\bibitem{ishwarspring18}
+P.~Ishwar, ``Lecture notes in learning from data (ec 503),'' January - May
+  2018.
+
 \bibitem{song1999general}
 F.~Song and W.~B. Croft, ``A general language model for information
   retrieval,'' in \emph{Proceedings of the eighth international conference on
@@ -107,9 +111,5 @@ H.~Sch{\"u}tze, C.~D. Manning, and P.~Raghavan, \emph{Introduction to
 \bibitem{kaggledataset}
 ``Kaggle data: Personalized medicine: Redefining cancer treatment,''
   https://www.kaggle.com/c/msk-redefining-cancer-treatment.
-
-\bibitem{ishwarspring18}
-P.~Ishwar, ``Lecture notes in learning from data (ec 503),'' January - May
-  2018.
 
 \end{thebibliography}

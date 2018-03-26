@@ -22,8 +22,8 @@ Done.
 You've used 18 entries,
             4087 wiz_defined-function locations,
             923 strings with 10540 characters,
-and the built_in function-call counts, 12782 in all, are:
-= -- 1015
+and the built_in function-call counts, 12784 in all, are:
+= -- 1016
 > -- 258
 < -- 110
 + -- 145
@@ -38,7 +38,7 @@ cite$ -- 24
 duplicate$ -- 935
 empty$ -- 1092
 format.name$ -- 51
-if$ -- 2985
+if$ -- 2986
 int.to.chr$ -- 0
 int.to.str$ -- 18
 missing$ -- 149

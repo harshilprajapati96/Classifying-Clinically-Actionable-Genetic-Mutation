@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex ProjectSummary"] 1522088367 "ProjectSummary.aux" "ProjectSummary.bbl" "ProjectSummary" 1522088368
+["bibtex ProjectSummary"] 1522093129 "ProjectSummary.aux" "ProjectSummary.bbl" "ProjectSummary" 1522093129
   "./IEEEtran.bst" 1522081334 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
   "EC503ref.bib" 1522087677 5190 824fb04da40dc10f1019dc9f8a2e106b ""
-  "ProjectSummary.aux" 1522088368 1763 74388348c34b6c5870fba36a31734075 ""
+  "ProjectSummary.aux" 1522093129 1789 fa7e5e20a36fd182643c757cd54a5bcb ""
   (generated)
-  "ProjectSummary.blg"
   "ProjectSummary.bbl"
-["pdflatex"] 1522088368 "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.tex" "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.pdf" "ProjectSummary" 1522088368
-  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.aux" 1522088368 1763 74388348c34b6c5870fba36a31734075 ""
-  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.tex" 1522088019 12101 13c0cbed4e1c7821bdaf323bab7a9ce7 ""
+  "ProjectSummary.blg"
+["pdflatex"] 1522093129 "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.tex" "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.pdf" "ProjectSummary" 1522093129
+  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.aux" 1522093129 1789 fa7e5e20a36fd182643c757cd54a5bcb ""
+  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.tex" 1522093129 12480 c470006e5715733f5926d69bc4f1b962 ""
   "/Users/bowensong/Library/texmf/tex/latex/local/placeins.sty" 1113865200 4087 636308456f60d2b31cbf97867db5708d ""
   "/usr/local/texlive/2017basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2017basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -48,6 +48,7 @@
   "/usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1480098733 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1480098733 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1480098733 37944 359e864bd06cde3b1cf57bb20757fb06 ""
+  "/usr/local/texlive/2017basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1480098734 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "/usr/local/texlive/2017basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1480098806 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1480098815 7612 729a8cc22a1ee0029997c7f74717ae05 ""
   "/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/ifluatex.sty" 1480098815 7324 2310d1247db0114eb4726807c8837a0e ""
@@ -97,12 +98,12 @@
   "/usr/local/texlive/2017basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1507853455 323200 e9b697a63e290ff6620eba8a812b8176 ""
   "/usr/local/texlive/2017basic/texmf-var/web2c/pdftex/pdflatex.fmt" 1505533377 2588968 6bf65a4572ba0cc1f45a6016b4183640 ""
   "/usr/local/texlive/2017basic/texmf.cnf" 1496851631 628 b344fac068e513a3e5fe2214c3a47398 ""
-  "ProjectSummary.aux" 1522088368 1763 74388348c34b6c5870fba36a31734075 ""
-  "ProjectSummary.bbl" 1522088367 4878 7f6d8c71b55a84121f535a8dc4b6b0df "bibtex ProjectSummary"
-  "ProjectSummary.tex" 1522088019 12101 13c0cbed4e1c7821bdaf323bab7a9ce7 ""
+  "ProjectSummary.aux" 1522093129 1789 fa7e5e20a36fd182643c757cd54a5bcb ""
+  "ProjectSummary.bbl" 1522093129 4878 5f08e205c7bd47303b437b4c2154ad29 "bibtex ProjectSummary"
+  "ProjectSummary.tex" 1522093129 12480 c470006e5715733f5926d69bc4f1b962 ""
   (generated)
-  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.log"
   "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.pdf"
   "ProjectSummary.pdf"
-  "ProjectSummary.log"
   "ProjectSummary.aux"
+  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.log"
+  "ProjectSummary.log"
