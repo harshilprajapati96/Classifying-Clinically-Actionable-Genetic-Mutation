@@ -109,14 +109,14 @@ The project concerns algorithms including:
 	\[h_{MPE} = P(Y_j|\pmb{x}_j) \propto P(Y_j)\prod^{d_j}_{i=1}P(w_{i,j}|Y), \;j = 1,\ldots,n\]
 	\item Logistic Regression \\
 	The logistic regression of multiples class is a supervised learning by maximizing the conditional likelihood.
-	\[\hat{\theta}(\mathbb{D} = arg \; max_\theta \sum_{j=1}^{n}p(y_j|x_j,\theta)), \;j = 1,\ldots,n\]Without a closed form, best $\theta$ is learnt via gradient decent with respect to the following questions. 
+	\[\hat{\theta}(\mathbb{D}) = arg \; max_\theta \sum_{j=1}^{n}p(y_j|x_j,\theta), \;j = 1,\ldots,n\]Without a closed form, best $\theta$ is learnt via gradient decent with respect to the following questions. 
 	%\[NLL(\theta) = \sum_{j=1}^{n}ln(\sum_{k=1}^{m}e^{\pmb{w}_k^T\pmb{x}^{ext}_j})-\sum_{k=1}^{m}\pmb{w}_{k}^{T}(\sum_{j=1}^n 1(y_j=k)x^{ext}_{j}\]
 	\[\nabla_{\pmb{w}_y}NLL(\theta) = \sum_{j=1}^{n}\bigg(\frac{e^{\pmb{w}_y^T\pmb{x}_j^{ext}}}{\sum_{k=1}^{m}e^{{\pmb{w}_k}^T\pmb{x}_j^{ext}}}-1(y_j = y)\bigg)\pmb{x}^{ext}_{j},\,y=1,\ldots,m.\]
 	%\[f(\theta):=NLL(\theta)+\frac{\lambda}{2}\sum_{k=1}^{m}||\pmb{w}{k}||^2_2,\; \lambda>0\]
 	\[\nabla_{\pmb{w}_y}f(\theta) = \nabla_{\pmb{w}_y}NLL(\theta)+\lambda\pmb{w}_{y},y=1,\ldots,m.\]
 	As a MPE/MAP Classifier, the decision is based on MPE rule:\[h_{MPE}(x) = arg \; max_{y \in\{1,\ldots,m\}p;(y|\pmb{x},\theta)}\]
 	\item Sensing aware kernel SVM\\
-	
+	This kernel design of SVM combines Bayes-optimum decision boundary with Maximum margin principle. \cite{ding2014sensing}
 	\item N-gram
 	\par One of the algorithm models we plan to us n-grams, specifically unigram and bigrams.  The n-grams model uses the probability of each word appearing. For unigram, it considers each word as independent of all other words. Therefore, for a sentence to appear, it would be the probability of each word appearing multiplied together. For bigram, it takes the probability of the first word appearing multiplied by the probability of the second word appearing given the first word and so. The probability of the word depends on the probability of the all the previous words that appear before it in a sentence. \cite{song1999general} \\
 	\begin{equation}

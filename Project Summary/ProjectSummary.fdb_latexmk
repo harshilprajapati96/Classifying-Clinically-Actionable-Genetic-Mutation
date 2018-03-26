@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex ProjectSummary"] 1522093129 "ProjectSummary.aux" "ProjectSummary.bbl" "ProjectSummary" 1522093129
+["bibtex ProjectSummary"] 1522095428 "ProjectSummary.aux" "ProjectSummary.bbl" "ProjectSummary" 1522095428
   "./IEEEtran.bst" 1522081334 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
   "EC503ref.bib" 1522087677 5190 824fb04da40dc10f1019dc9f8a2e106b ""
-  "ProjectSummary.aux" 1522093129 1789 fa7e5e20a36fd182643c757cd54a5bcb ""
+  "ProjectSummary.aux" 1522095428 1816 375ce319c0890ca9ad88f6948a9d9735 ""
   (generated)
   "ProjectSummary.bbl"
   "ProjectSummary.blg"
-["pdflatex"] 1522093129 "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.tex" "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.pdf" "ProjectSummary" 1522093129
-  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.aux" 1522093129 1789 fa7e5e20a36fd182643c757cd54a5bcb ""
-  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.tex" 1522093129 12480 c470006e5715733f5926d69bc4f1b962 ""
+["pdflatex"] 1522095428 "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.tex" "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.pdf" "ProjectSummary" 1522095428
+  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.aux" 1522095428 1816 375ce319c0890ca9ad88f6948a9d9735 ""
+  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.tex" 1522095427 12600 0c5101082b9a031ac9345fb2289f6a86 ""
   "/Users/bowensong/Library/texmf/tex/latex/local/placeins.sty" 1113865200 4087 636308456f60d2b31cbf97867db5708d ""
   "/usr/local/texlive/2017basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2017basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -98,12 +98,12 @@
   "/usr/local/texlive/2017basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1507853455 323200 e9b697a63e290ff6620eba8a812b8176 ""
   "/usr/local/texlive/2017basic/texmf-var/web2c/pdftex/pdflatex.fmt" 1505533377 2588968 6bf65a4572ba0cc1f45a6016b4183640 ""
   "/usr/local/texlive/2017basic/texmf.cnf" 1496851631 628 b344fac068e513a3e5fe2214c3a47398 ""
-  "ProjectSummary.aux" 1522093129 1789 fa7e5e20a36fd182643c757cd54a5bcb ""
-  "ProjectSummary.bbl" 1522093129 4878 5f08e205c7bd47303b437b4c2154ad29 "bibtex ProjectSummary"
-  "ProjectSummary.tex" 1522093129 12480 c470006e5715733f5926d69bc4f1b962 ""
+  "ProjectSummary.aux" 1522095428 1816 375ce319c0890ca9ad88f6948a9d9735 ""
+  "ProjectSummary.bbl" 1522095428 4878 5f08e205c7bd47303b437b4c2154ad29 "bibtex ProjectSummary"
+  "ProjectSummary.tex" 1522095427 12600 0c5101082b9a031ac9345fb2289f6a86 ""
   (generated)
-  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.pdf"
-  "ProjectSummary.pdf"
-  "ProjectSummary.aux"
-  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.log"
   "ProjectSummary.log"
+  "ProjectSummary.aux"
+  "ProjectSummary.pdf"
+  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.pdf"
+  "/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-Genetic-Mutation/Project Summary/ProjectSummary.log"
