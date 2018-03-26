@@ -83,7 +83,7 @@ tabsize=3
 \section{Problem Definition}
 This project explores machine learning algorithms for document classification. The specific application of the project is sensitive to datasets. The contribution of the project is to compare and contrast algorithm performances based on results and computation efficiency with respect to different types of datasets.
 \section{Literature Review}
- Document Classification is a traditional problem where usually a bag-of-words approach is to extract features and are used for supervised classificationusin Naive Bayes or Support Vector Machine (SVM) algorithms \cite{sachan2018investigating}. \\
+ Document Classification is a traditional problem where usually a bag-of-words approach is to extract features and are used for supervised classification using Naive Bayes or Support Vector Machine (SVM) algorithms \cite{sachan2018investigating}. \\
 
 
 In classical papers, the order of words is ignored, but the order can be included by using Term Frequency–Inverse Document Frequency (tf-idf) scheme where basic identification of sets of words that are discriminative for documents in the collection but reveals little in the way of inter- or intra- document statistical structure \cite{maes1995agents}. To overcome the short commings of tf-idf, latent semantic indexing was introduced in \cite{deerwester1990indexing}. It uses a singular value decomposition of the X matrix to identify a linear subspace in the space of tf-idf features that captures most of the variance in collection. This was modified by \cite{hofmann1999probabilistic} to fitting the model to data using maximum likelihood or Bayesian methods known as Probabilistic latent semantic indexing (pLSI). Latent Dirichlet allocation (LDA) considers exchangeable representations for documents and words, we need to consider mixture models that capture the exchangeability of both words and documents \cite{blei2003latent}. Recent study shows use of Convolutional Neural Network (CNN) \cite{kim2014convolutional} to get improved results. \\
@@ -103,19 +103,25 @@ The project concerns algorithms including:
 \item Unigram model
 \item Markov model.
 \end{itemize}
-The bag-of-words model with Naive Bayes assumption is considered the baseline for prediction accuracy. This project also includes stop-words filtering based on stop-words vocabulary list and term frequency–inverse document frequency (tf–idf) in attempt to improve performances for each model. The project learns from different datasets; the overview of the datasets is included in later chapters. In addition to discussing algorithm performances, the project also concerns the importance of preserving word ordering within a document with respect to classification accuracy. The project attempts to explore correlations between word vectors generated from Google word2vec algorithm and its occurrences. 
+ This project also includes stop-words filtering based on stop-words vocabulary list and term frequency–inverse document frequency (tf–idf) in attempt to improve performances for each model. The project learns from different datasets; the overview of the datasets is included in later chapters. In addition to discussing algorithm performances, the project also concerns the importance of preserving word ordering within a document with respect to classification accuracy. The project attempts to explore correlations between word vectors generated from Google word2vec algorithm and its occurrences. 
 \subsection{Model and Algorithms}
 \begin{itemize}
-	\item Naive Bayes \\
-	Something
+	\item Naive Bayes Classifier\\
+	The Naive Bayes classifier with bag-of-words model is considering all features as conditionally independent given the class label and evaluated using MPE decision rule. The prediction performance considers to be the baseline for our prediction accuracy.
+	\[P(Y_j|\pmb{x}_j) \propto P(Y_j)\prod^{d_j}_{i=1}P(w_{i,j}|Y)\]
 	\item Logistic Regression \\
-	Something
-	\item Sensing aware kernal SVM\\
+
+	\[NLL(\theta) = \sum_{j=1}^{n}ln(\sum_{k=1}^{m}e^{\pmb{w}_k^T\pmb{x}^{ext}_j})-\sum_{k=1}^{m}\pmb{w}_{k}^{T}(\sum_{j=1}^n 1(y_j=k)x^{ext}_{j}\]
+	\[\nabla_{\pmb{w}_y}NLL(\theta) = \sum_{j=1}^{n}\bigg(\frac{e^{\pmb{w}_y^T\pmb{x}_j^{ext}}}{\sum_{k=1}^{m}e^{{\pmb{w}_k}^T\pmb{x}_j^{ext}}}-1(y_j = y)\bigg)\pmb{x}^{ext}_{j},\,y=1,\ldots,m.\]
+	\[f(\theta):=NLL(\theta)+\frac{\lambda}{2}\sum_{k=1}^{m}||\pmb{w}{k}||^2_2,\; \lambda>0\]
+	\[\nabla_{\pmb{w}_y}f(\theta) = \nabla_{\pmb{w}_y}NLL(\theta)+\lambda\pmb{w}_{y},y=1,\ldots,m.\]
+	As MPE/MAP Classifier, the decision is based on MPE rule:\[h_{MPE}(x) = arg \; max{y \in\{1,\ldots,m\}p;(y|\pmb{x},\theta)}\]
+	\item Sensing aware kernel SVM\\
 	Something
 	\item N-gram
 	\par One of the algorithm models we plan to us n-grams, specifically unigram and bigrams.  The n-grams model uses the probability of each word appearing. For unigram, it considers each word as independent of all other words. Therefore, for a sentence to appear, it would be the probability of each word appearing multiplied together. For bigram, it takes the probability of the first word appearing multiplied by the probability of the second word appearing given the first word and so. The probability of the word depends on the probability of the all the previous words that appear before it in a sentence. \cite{song1999general}. \\
 	
-	In the n-gram models, the features can become very large. For example, if there are D features, in unigram feature size would be D but in bi-gram the feature size will be D2. But with every increasing n, the frequencies of each one appearing decreases. Due to this very large, the efficiency of the model is not great and can run into memory problems. One way to make the model more efficient is by setting a threshold frequency of appearance\cite{furnkranz1998study}.  \\
+	In the n-gram models, the features can become very large. For example, if there are D features, in unigram feature size would be D but in bi-gram the feature size will be D2. However, with every increase in n, the frequencies of each one appearing decreases. Due to this very large, the efficiency of the model is not great and can run into memory problems. One way to make the model more efficient is by setting a threshold frequency of appearance\cite{furnkranz1998study}.  \\
 	
 	\item TF-IDF\\
 	Another way to do thresholding aside from just word frequency is by determine how important a word is in determining the class of a document. To determine how important a word is we will be using tf-idf weighting. Tf-idf weighting takes into consideration word frequency as well as document frequency. The weight of the word is the frequency of a word multiplied by the inverse document frequency. A word has the highest weight when with a high word frequency and a low document frequency. Using the tf-idf, we can set a threshold, which would decrease the feature size and remove words that don’t mean much, for example stop words \cite{schutze2008introduction}.
@@ -125,7 +131,7 @@ The bag-of-words model with Naive Bayes assumption is considered the baseline fo
 \subsection{Code and Dataset}
 We have multiple datasets in which we want to implement these algorithms. Initially we want to start by using the news group data set, due to previous use of the data set. This dataset has 20 class, 11,314 training documents and 7,532 test documents. The dataset is already preprocessed in a form which can be used. It is broken down into document ID, word ID and word count. Once we test the algorithms on the news group data set, we will test it on another dataset, Reuters21578 but will be using the ModApt version, which is a smaller overall dataset from the Reuters21578 dataset \cite{dataset}. In this dataset there are 5,945 training documents and 2,347 testing documents. This dataset has also been preprocessed. Finally we want to run these algorithms on the dataset obtained from a Kaggle project, Personalized Medicine: Redefining Cancer Treatment \cite{kaggledataset}. The data has not been preprocessed so we have the raw files. The data we have is currently, a text file of each paper. There 3,320 documents for training and 5,667 documents for testing. There are more test documents due to Kaggle adding machine generated documents, but these machines generated documents can be removed and the test dataset will be down to 987 documents. There is a total of 9 classes in this dataset. But the biggest job with this dataset is all the preprocessing has to be done by us and made into a usable form, like the other datasets. 
 
-\subsection{Minimum Achieviable Plan}
+\subsection{Minimum Achievable Plan}
 \section{Conclusion}
 \section*{Division of Labor}
 
