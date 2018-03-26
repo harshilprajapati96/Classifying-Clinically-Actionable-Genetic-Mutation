@@ -89,6 +89,17 @@ W.~Ding, P.~Ishwar, V.~Saligrama, and W.~C. Karl, ``Sensing-aware kernel svm,''
   International Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
   2014, pp. 2947--2951.
 
+\bibitem{song1999general}
+F.~Song and W.~B. Croft, ``A general language model for information
+  retrieval,'' in \emph{Proceedings of the eighth international conference on
+  Information and knowledge management}.\hskip 1em plus 0.5em minus 0.4em\relax
+  ACM, 1999, pp. 316--321.
+
+\bibitem{schutze2008introduction}
+H.~Sch{\"u}tze, C.~D. Manning, and P.~Raghavan, \emph{Introduction to
+  information retrieval}.\hskip 1em plus 0.5em minus 0.4em\relax Cambridge
+  University Press, 2008, vol.~39.
+
 \bibitem{dataset}
 ``Collection of datasets,''
   http://www.cad.zju.edu.cn/home/dengcai/Data/TextData.html.
