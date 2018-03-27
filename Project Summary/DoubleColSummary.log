@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  26 MAR 2018 19:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  26 MAR 2018 20:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -379,23 +379,21 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 46.
-
-Underfull \hbox (badness 1270) in paragraph at lines 56--57
-\OT1/ptm/m/n/10 clas-si-fier [[]9[]], Bayes-optimum de-ci-sion with the max-i-
- []
-
-
-Underfull \vbox (badness 1354) has occurred while \output is active []
-
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 63.
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no “ in font ptmr7t!
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 65.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 63.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 65.
+ [1{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-Overfull \hbox (18.23756pt too wide) detected at line 69
+
+]
+Overfull \hbox (18.23756pt too wide) detected at line 71
 \OML/cmm/m/it/10 h[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/
 cmm/m/it/10 Y[]\OMS/cmsy/m/n/10 j[][]\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 / \OML/
 cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Y[]\OT1/cmr/m/n/10 ) [] \OML/cmm
@@ -405,31 +403,28 @@ cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Y[]\OT1/cmr/m/n/10 ) [] \OML/cmm
  []
 
 
-Underfull \hbox (badness 1442) in paragraph at lines 70--72
-[]\OT1/ptm/m/n/10 Multi-class lo-gis-tic re-gres-sion (Max-i-mum En-tropy
+Underfull \hbox (badness 2119) in paragraph at lines 72--74
+[]\OT1/ptm/m/it/10 Multi-class lo-gis-tic re-gres-sion (Max-i-mum En-tropy
  []
 
-[1{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-
-]
-Overfull \hbox (13.38219pt too wide) detected at line 75
+Overfull \hbox (13.38219pt too wide) detected at line 77
 \OMS/cmsy/m/n/10 r[]\OML/cmm/m/it/10 NLL\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^R\O
 T1/cmr/m/n/10 ) = [] [][] \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 1(\OML/cmm/m/it/
 10 y[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 y\OT1/cmr/m/n/10 )[][][]
  []
 
 
-Overfull \hbox (15.50916pt too wide) detected at line 91
-[][]\OML/cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 ) = 
-\OML/cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 )\OML/cm
-m/m/it/10 :P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 w[] \OMS/cmsy/m/n/10 j \OML/cmm/m
-/it/10 w[]\OT1/cmr/m/n/10 ) [] \OML/cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it
-/10 w[] \OMS/cmsy/m/n/10 j \OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 )
+Overfull \hbox (15.50916pt too wide) detected at line 94
+[]\OML/cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 ) = \O
+ML/cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 )\OML/cmm/
+m/it/10 :P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 w[] \OMS/cmsy/m/n/10 j \OML/cmm/m/i
+t/10 w[]\OT1/cmr/m/n/10 ) [] \OML/cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it/1
+0 w[] \OMS/cmsy/m/n/10 j \OML/cmm/m/it/10 w[]\OT1/cmr/m/n/10 )
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--93
+Underfull \hbox (badness 10000) in paragraph at lines 94--96
 
  []
 
@@ -437,7 +432,7 @@ Missing character: There is no Ã in font ptmr7t!
 Missing character: There is no ¯ in font ptmr7t!
 [2]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 128.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 121.
  (./DoubleColSummary.bbl
 Underfull \hbox (badness 1117) in paragraph at lines 25--27
 \OT1/ptm/m/n/9 ti-gat-ing the work-ing of text clas-si-fiers,'' \OT1/ptm/m/it/9
@@ -445,32 +440,32 @@ Underfull \hbox (badness 1117) in paragraph at lines 25--27
  []
 
 
-Underfull \hbox (badness 1072) in paragraph at lines 95--97
+Underfull \hbox (badness 1072) in paragraph at lines 111--113
 []\OT1/ptm/m/n/9 ``Kaggle data: Per-son-al-ized medicine: Re-defin-ing can-
  []
 
 
-Underfull \hbox (badness 1590) in paragraph at lines 95--97
+Underfull \hbox (badness 1590) in paragraph at lines 111--113
 \OT1/ptm/m/n/9 cer treat-ment,'' https://www.kaggle.com/c/msk-redefining-
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 148.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 141.
  [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 148.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 141.
  (./DoubleColSummary.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 148.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 148.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 148.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 141.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 141.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 141.
  ) 
 Here is how much of TeX's memory you used:
  6676 strings out of 492995
- 95721 string characters out of 6132704
- 288265 words of memory out of 5000000
- 10089 multiletter control sequences out of 15000+600000
+ 95784 string characters out of 6132704
+ 288440 words of memory out of 5000000
+ 10093 multiletter control sequences out of 15000+600000
  29999 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,8n,26p,925b,412s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,8n,26p,1201b,410s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -484,10 +479,10 @@ xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/201
 7/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-di
 st/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/t
 ype1/urw/times/utmri8a.pfb>
-Output written on DoubleColSummary.pdf (3 pages, 132848 bytes).
+Output written on DoubleColSummary.pdf (3 pages, 140490 bytes).
 PDF statistics:
- 140 PDF objects out of 1000 (max. 8388607)
- 121 compressed objects within 2 object streams
- 39 named destinations out of 1000 (max. 500000)
+ 133 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
+ 35 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

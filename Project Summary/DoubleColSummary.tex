@@ -33,7 +33,7 @@
 \begin{document}
 
 %%%%%%%%% TITLE
-\title{Project Summary: Document Classifier}
+\title{Study and Analysis of Text Document Classification Algorithms}
 \author[1]{Arjun Patel}
 \author[1]{Harshil Prajapati}
 \author[1]{Bowen Song}
@@ -49,25 +49,27 @@
 
 %%%%%%%%% BODY TEXT
 \section{Literature Review}
-Document Classification is a traditional problem where usually a bag-of-words approach is to extract features and are used for supervised classification using Naive Bayes or Support Vector Machine (SVM) algorithms \cite{sachan2018investigating}. 
+ Document Classification is a traditional problem where usually a bag-of-words approach is to extract features and are used for supervised classification using Naive Bayes or Support Vector Machine (SVM) algorithms \cite{sachan2018investigating}. 
 
-\hspace{15pt} In classical papers, the order of words is ignored, but the order can be included by using Term Frequency - Inverse Document Frequency (TF-IDF) they can be incorporated \cite{maes1995agents}. Latent semantic indexing was introduced in \cite{deerwester1990indexing} which uses Singular Value Decomposition onto TF-IDF space. This was modified by \cite{hofmann1999probabilistic} to fitting the model to data using maximum likelihood or Bayesian methods known as Probabilistic latent semantic indexing (pLSI). Latent Dirichlet allocation (LDA) uses mixture models considering the exchangeability of both words and documents \cite{blei2003latent}. Kernel methods (KMs) are an effective alternative to explicit feature extraction. Another way to efficiently extract features is based on finding conditional probability using n-gram models \cite{furnkranz1998study} .
+In classical papers, the order of words is ignored, but the order can be included by using Term Frequency–Inverse Document Frequency (TF-IDF) scheme where basic identification of sets of words that are discriminative for documents in the collection but reveals little in the way of inter- or intra- document statistical structure \cite{maes1995agents}. To overcome the short commings of TF-IDF, latent semantic indexing was introduced in \cite{deerwester1990indexing}. It uses a singular value decomposition of the X matrix to identify a linear subspace in the space of tf-idf features that captures most of the variance in collection. This was modified by \cite{hofmann1999probabilistic} to fitting the model to data using maximum likelihood or Bayesian methods known as Probabilistic latent semantic indexing (pLSI). Latent Dirichlet allocation (LDA) considers exchangeable representations for documents and words, we need to consider mixture models that capture the exchangeability of both words and documents \cite{blei2003latent}. Recent study shows use of Convolutional Neural Network (CNN) \cite{kim2014convolutional} to get improved results. 
 
-\hspace{15pt} More over the traditional supervised learning techniques, research has been done to improve prediction in k-NN by using pyramidal decomposition \cite{heroux1998classification},  skip-gram and paragraph vectors-distributed bag of words (PV-DBOW) with multiple discriminant analysis \cite{lauren2018discriminant}, expansion method and Powerset-label mechanism for the short hierarchical classification using the Support Vector Machine (SVM) classifier \cite{salih2018term}, Bayes-optimum decision with the maximum margin principle yields kernels for SVMs \cite{ding2014sensing}.Bayes-optimum decision with the maximum margin principle yields kernels for SVMs \cite{ding2014sensing}.
+Due to the size of documents, different techniques like topological spaces for developing Information Retrieval System (IRS) \cite{parlak2018feature},  Ontology-Based Feature Vector Generation \cite{elhadad2018novel} have been developed which can effectively reduce the computation while extracting features that aids in classification. Kernel methods (KMs) are an effective alternative to explicit feature extraction. Another way to efficiently extract features is based on finding conditional probability using N-gram models \cite{furnkranz1998study} .
+
+More over the traditional supervised learning techniques, research has been done to improve prediction in k-NN by using pyramidal decomposition \cite{heroux1998classification},  skip-gram and paragraph vectors-distributed bag of words (PV-DBOW) with multiple discriminant analysis \cite{lauren2018discriminant}, expansion method and Powerset-label mechanism for the short hierarchical classification using the Support Vector Machine (SVM) classifier \cite{salih2018term}, Bayes-optimum decision with the maximum margin principle yields kernels for SVMs \cite{ding2014sensing}.
 
 \section{Proposed Work}
 This projects aims at implementation of various document classification algorithms discussed in Section \ref{model}
-This project also includes stop-words filtering based on stop-words vocabulary list and TF-IDF in attempt to improve performances for each model. The project learns from different datasets; the overview of the datasets is included in later chapters. In addition to discussing algorithm performances, the project also concerns the importance of preserving word ordering within a document with respect to classification accuracy. 
+This project also includes stop-words filtering based on stop-words vocabulary list and TF-IDF in attempt to improve performances for each model. The project learns from different datasets; the overview of the datasets is discussed in Section \ref{data}. In addition to discussing algorithm performances, the project also concerns the importance of preserving word ordering within a document with respect to classification accuracy. 
 \subsection{Model and Algorithms}\label{model}
 \begin{itemize}
 	\item \textit{ Preprocessing using TF-IDF} \\
 	A way to do thresholding aside from just word frequency is by determine how important a word is in determining the class of a document. To determine how important a word is we will be using TF-IDF  weighting, which takes into consideration word frequency as well as document frequency. The weight of the word is the frequency of a word multiplied by the inverse document frequency. A word has the highest weight when with a high word frequency and a low document frequency. Using the TF-IDF, we can set a threshold, which would decrease the feature size and remove irrelevent words \cite{schutze2008introduction}.
 	
 	\item \textit{Bag-of-words model with Naive Bayes assumption}\\
-	The Naive Bayes classifier with bag-of-words model is considering all features as conditionally independent given the class label and evaluated using MPE decision rule.\cite{ishwarspring18} The prediction performance considers to be the baseline for our prediction accuracy. 
+	 The Naive Bayes classifier with bag-of-words model is considering all features as conditionally independent given the class label and evaluated using MPE decision rule \cite{ishwarspring18}. The prediction performance considers to be the baseline for our prediction accuracy. 
 	The decision is based on MPE rule:
 	\[h_{MPE} = P(Y_j|\pmb{x}_j) \propto P(Y_j)\prod^{d_j}_{i=1}P(w_{i,j}|Y), \;j = 1,\ldots,n\]
-	\item Multi-class logistic regression (Maximum Entropy Classifier) \\
+	\item \textit{Multi-class logistic regression (Maximum Entropy Classifier)} \\
 	The logistic regression of multiples class is a supervised learning by maximizing the conditional likelihood.
 	\[\hat{\theta}(\mathbb{D}) = arg \; max_\theta \sum_{j=1}^{n}p(y_j|x_j,\theta), \;j = 1,\ldots,n\]Without a closed form, best $\theta$ is learnt via gradient decent with respect to the following questions. 
 	%\[NLL(\theta) = \sum_{j=1}^{n}ln(\sum_{k=1}^{m}e^{\pmb{w}_k^T\pmb{x}^{ext}_j})-\sum_{k=1}^{m}\pmb{w}_{k}^{T}(\sum_{j=1}^n 1(y_j=k)x^{ext}_{j}\]
@@ -76,49 +78,40 @@ This project also includes stop-words filtering based on stop-words vocabulary l
 	
 	%\[f(\theta):=NLL(\theta)+\frac{\lambda}{2}\sum_{k=1}^{m}||\pmb{w}{k}||^2_2,\; \lambda>0\]
 	\[\nabla_{\pmb{w}_y}f(\theta) = \nabla_{\pmb{w}_y}NLL(\theta)+\lambda\pmb{w}_{y}, y=1,\ldots,m.\]
-	As a MPE/MAP Classifier, the decision is based on MPE rule where we maximize $f(\theta)$. 
-	\blfootnote{The equations used are from \cite{song1999general} and \cite{ishwarspring18}}
-	\item Sensing aware kernel SVM \cite{ding2014sensing}\\
-	This kernel design of SVM combines Bayes-optimum decision boundary with Maximum margin principle. \cite{ding2014sensing}
-	\item N-gram
-	\par The N-grams model uses the probability of each word appearing. For unigram, it considers each word as independent of all other words. Therefore, for a sentence to appear, it would be the probability of each word appearing multiplied together. For bigram, it takes the probability of the first word appearing multiplied by the probability of the second word appearing given the first word and so. The probability of the word depends on the probability of the all the previous words that appear before it in a sentence. \cite{song1999general} 
-	\begin{equation}
+	As a MPE/MAP Classifier, the decision is based on MPE rule:
+	\begin{equation*}
+		h_{MPE}(x) = arg \; max_{y \in\{1,\ldots,m\}p;(y|\pmb{x},\theta)}
+	\end{equation*}
+	\item \textit{Sensing aware kernel SVM}\\
+	This kernel design of SVM combines Bayes-optimum decision boundary with Maximum margin principle. The optimal classifier, in a binary class scenario, has the following form \[f(\pmb{x})=sign\bigg( \sum_{i=1}^{n}\beta^*_iK(\pmb{x},\pmb{x}^i)\bigg),\] where the kernel is defined by \[K(\pmb{x},\pmb{x}') := <p(\pmb{x}|\pmb{z}),p(\pmb{x}'|\pmb{z})> .\]This method can be extended into a multi-class classification as described in \cite{ding2014sensing}.
+	\item \textit{N-gram}\\
+	 The N-grams model uses the probability of each word appearing. For unigram, it considers each word as independent of all other words. Therefore, for a sentence to appear, it would be the probability of each word appearing multiplied together. For bigram, it takes the probability of the first word appearing multiplied by the probability of the second word appearing given the first word and so. The probability of the word depends on the probability of the all the previous words that appear before it in a sentence. \cite{song1999general} 
+	\begin{equation*}
 	\textit{Unigram:}  P(w_{1,n})  = P(w_1).P(w_2) \cdots P(w_n)
-	\end{equation}
-	and
-	\begin{equation}
+	\end{equation*}
+	\begin{equation*}
 	\textit{Bigram:}  P(w_{1,n})  = P(w_1).P(w_2 \mid  w_1) \cdots P(w_n \mid w_{n-1})
-	\end{equation}
-	In the n-gram models, the features can become very large i.e. $D^N$ for N-gram model which can be reduced by setting a threshold frequency of appearance\cite{furnkranz1998study}.  \\
-	
-	
+	\end{equation*}
+	In the N-gram models, the features can become very large i.e. $D^N$ for N-gram model which can be reduced by setting a threshold frequency of appearance\cite{furnkranz1998study}.  \\
+			
 	
 \end{itemize}
 
-\subsection{Code and Dataset}
+\subsection{Code and Dataset}\label{data}
 We have multiple datasets in which we want to implement these algorithms. 
 \begin{enumerate}
-	\item News Group (preprocessed) - 20 class, 11,314 training documents ,  7,532 test documents.
-	\item Reuters21578 (preprocessed) - 65 class, 945 training documents ,  2,347 testing documents \cite{dataset}
-	\item Personalized Medicine: Redefining Cancer Treatment - 9 classes,  3,320 training documents , 5,667 testing documents  \cite{kaggledataset}
+	\item News Group (preprocessed) - 20 class, 11,314 training documents and  7,532 test documents.
+	\item Reuters21578 (preprocessed) - 65 class, 945 training documents and  2,347 testing documents \cite{dataset}
+	\item Personalized Medicine: Redefining Cancer Treatment - 9 classes,  3,320 training documents and 5,667 testing documents  \cite{kaggledataset}
 \end{enumerate}
 
 \subsection{Minimum Achieviable Plan}
 We would like to implement and compare all the algorithms but if we aren't able to complete all the algorithms we will try to implement at least Naive Bayes, Logistic Regression, Traditional SVM and N-gram.
 
-	\subsection{Code and Dataset}
-We have multiple datasets in which we want to implement these algorithms. 
-\begin{enumerate}
-	\item News Group (preprocessed) - 20 class, 11,314 training documents,  7,532 test documents.
-	\item Reuters21578 (preprocessed) - 65 class, 945 training documents,  2,347 testing documents \cite{dataset}
-	\item Personalized Medicine: Redefining Cancer Treatment - 9 classes,  3,320 training documents, 5,667 testing documents  \cite{kaggledataset}
-\end{enumerate}
-
-\subsection{Minimum Achieviable Plan}
-We would like to implement and compare all the algorithms but if we aren't able to complete all the algorithms we will try to implement atleast Naive Bayes, Logistic Regression, Traditional SVM ,N-gram.
 
 \section{Conclusion}
 In this project, we will be exploring different document classification algorithms. We will be using the Naïve Bayes, Logistic Regression, SVM (kernel sensing), and n-grams models. Each of these three algorithms will be tested on three datasets: newsgroup dataset, Reuters21578 dataset and Personalized Medicine: Redefining Cancer Treatment (Kaggle Project) dataset. Each of the algorithms will be taking into account TF-IDF to give each word value of importance. At the end we want to be able to compare the performances of each algorithm in terms of accuracy of classification and computational efficiency across all three datasets. 
+\blfootnote{The equations used are from \cite{ishwarspring18} and \cite{song1999general} }
 
 \newpage
 \section*{Division of Labor}

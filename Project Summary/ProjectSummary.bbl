@@ -90,8 +90,7 @@ W.~Ding, P.~Ishwar, V.~Saligrama, and W.~C. Karl, ``Sensing-aware kernel svm,''
   2014, pp. 2947--2951.
 
 \bibitem{ishwarspring18}
-P.~Ishwar, ``Lecture notes in learning from data (ec 503),'' January - May
-  2018.
+P.~Ishwar, ``Ec 503 - learning from data,'' January - May 2018.
 
 \bibitem{song1999general}
 F.~Song and W.~B. Croft, ``A general language model for information
@@ -105,8 +104,8 @@ H.~Sch{\"u}tze, C.~D. Manning, and P.~Raghavan, \emph{Introduction to
   University Press, 2008, vol.~39.
 
 \bibitem{dataset}
-``Collection of datasets,''
-  http://www.cad.zju.edu.cn/home/dengcai/Data/TextData.html.
+``Collection of datasets,'' http://www.cad.zju.edu.cn/home/
+  dengcai/Data/TextData.html.
 
 \bibitem{kaggledataset}
 ``Kaggle data: Personalized medicine: Redefining cancer treatment,''

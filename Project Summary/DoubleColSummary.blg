@@ -19,45 +19,45 @@ Warning--empty booktitle in kaggledataset
 Warning--empty year in kaggledataset
 
 Done.
-You've used 15 entries,
+You've used 18 entries,
             4087 wiz_defined-function locations,
-            908 strings with 9973 characters,
-and the built_in function-call counts, 10759 in all, are:
-= -- 848
-> -- 219
-< -- 93
-+ -- 124
-- -- 34
-* -- 510
-:= -- 1589
-add.period$ -- 35
-call.type$ -- 15
-change.case$ -- 16
-chr.to.int$ -- 216
-cite$ -- 21
-duplicate$ -- 784
-empty$ -- 921
-format.name$ -- 43
-if$ -- 2515
+            923 strings with 10528 characters,
+and the built_in function-call counts, 12784 in all, are:
+= -- 1016
+> -- 258
+< -- 110
++ -- 145
+- -- 40
+* -- 603
+:= -- 1905
+add.period$ -- 42
+call.type$ -- 18
+change.case$ -- 19
+chr.to.int$ -- 255
+cite$ -- 24
+duplicate$ -- 935
+empty$ -- 1092
+format.name$ -- 51
+if$ -- 2986
 int.to.chr$ -- 0
-int.to.str$ -- 15
-missing$ -- 126
-newline$ -- 68
-num.names$ -- 13
-pop$ -- 305
+int.to.str$ -- 18
+missing$ -- 149
+newline$ -- 77
+num.names$ -- 16
+pop$ -- 359
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 836
+skip$ -- 995
 stack$ -- 0
-substring$ -- 526
-swap$ -- 613
-text.length$ -- 21
+substring$ -- 619
+swap$ -- 729
+text.length$ -- 25
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 15
+type$ -- 18
 warning$ -- 6
-while$ -- 50
-width$ -- 17
-write$ -- 157
+while$ -- 61
+width$ -- 20
+write$ -- 185
 (There were 6 warnings)

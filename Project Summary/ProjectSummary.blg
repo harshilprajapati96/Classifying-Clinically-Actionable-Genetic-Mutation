@@ -21,7 +21,7 @@ Warning--empty year in kaggledataset
 Done.
 You've used 18 entries,
             4087 wiz_defined-function locations,
-            923 strings with 10540 characters,
+            923 strings with 10524 characters,
 and the built_in function-call counts, 12784 in all, are:
 = -- 1016
 > -- 258

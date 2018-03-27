@@ -46,6 +46,22 @@ D.~M. Blei, A.~Y. Ng, and M.~I. Jordan, ``Latent dirichlet allocation,''
   \emph{Journal of machine Learning research}, vol.~3, no. Jan, pp. 993--1022,
   2003.
 
+\bibitem{kim2014convolutional}
+Y.~Kim, ``Convolutional neural networks for sentence classification,''
+  \emph{arXiv preprint arXiv:1408.5882}, 2014.
+
+\bibitem{parlak2018feature}
+B.~Parlak and A.~K. Uysal, ``On feature weighting and selection for medical
+  document classification,'' in \emph{Developments and Advances in Intelligent
+  Systems and Applications}.\hskip 1em plus 0.5em minus 0.4em\relax Springer,
+  2018, pp. 269--282.
+
+\bibitem{elhadad2018novel}
+M.~K. Elhadad, K.~M. Badran, and G.~I. Salama, ``A novel approach for
+  ontology-based feature vector generation for web text document
+  classification,'' \emph{International Journal of Software Innovation (IJSI)},
+  vol.~6, no.~1, pp. 1--10, 2018.
+
 \bibitem{furnkranz1998study}
 J.~F{\"u}rnkranz, ``A study using n-gram features for text categorization,''
   \emph{Austrian Research Institute for Artifical Intelligence}, vol.~3, no.
