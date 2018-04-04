@@ -1,3 +1,4 @@
 # Mac folder order file
-*Icon\r
+*Icon\ r
 *.DS_Store
+*.m~
