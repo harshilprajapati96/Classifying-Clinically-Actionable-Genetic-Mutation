@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  26 MAR 2018 20:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  30 MAR 2018 09:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -379,9 +379,6 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 46.
-Missing character: There is no â in font ptmr7t!
-Missing character: There is no € in font ptmr7t!
-Missing character: There is no “ in font ptmr7t!
 LaTeX Font Info:    Try loading font information for OMS+ptm on input line 65.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/omsptm.fd
@@ -465,7 +462,7 @@ Here is how much of TeX's memory you used:
  10093 multiletter control sequences out of 15000+600000
  29999 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,8n,26p,1201b,410s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,8n,26p,1207b,392s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -479,7 +476,7 @@ xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/201
 7/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-di
 st/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/t
 ype1/urw/times/utmri8a.pfb>
-Output written on DoubleColSummary.pdf (3 pages, 140490 bytes).
+Output written on DoubleColSummary.pdf (3 pages, 140494 bytes).
 PDF statistics:
  133 PDF objects out of 1000 (max. 8388607)
  114 compressed objects within 2 object streams
