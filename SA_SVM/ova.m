@@ -1,20 +1,24 @@
 %% SVM Classifier for Text Document OVA fucntion
 % MATLAB R2017b
 % Bowen Song U04079758
-function [X_train_1_2,Y_train_1_2]...
-    = ova(class,X_train,Y_train,Y_train_expand,vocab_len)
-% for Training documents
-Y_train_1_2_expand = Y_train_expand.*(Y_train_expand~=class)...
-    + Y_train_expand.*(Y_train_expand==class);
-X_train_1_2_expand = X_train(Y_train_1_2_expand~=0,:);
-Y_train_1_2 = Y_train.*(Y_train~=class) + Y_train.*(Y_train==class);
-% Clearup the zeros
-Y_train_1_2 = Y_train_1_2(any(Y_train_1_2,2),:);
-X_train_1_2_expand = X_train_1_2_expand(any(X_train_1_2_expand,2),:);
 
-%% Make X train and X test based on Y
-[~,~,docIDreorder_train] = unique(X_train_1_2_expand(:,1));
-X_train_1_2 = sparse(docIDreorder_train,X_train_1_2_expand(:,2),...
-    X_train_1_2_expand(:,3),length(Y_train_1_2),vocab_len);
+%% Input Parameters
+% Two class numbers: class1,class2
+% X_train: doc X N, doc= unique doc_id N = tuning prameter
+% Y_train: no change doc X 1
+%% Output Paramters
+% X_train: doc X N
+% Y_train: doc X 1 (class labeld +1 not class is -1)
+
+function [X_train,Y_train]...
+    = ova(class,X_train,Y_train)
+% for Training documents
+Y_train(Y_train~=class)=-1;
+Y_train(Y_train==class)=1;
+% make sure there is no zero element in the matrix
+if (nnz(X_train)/numel(X_train) ~= 1)
+    error("OVA X_train_1_2: class %d and %d contains zero elements"...
+        ,class1,class2)
+end
 
 end
