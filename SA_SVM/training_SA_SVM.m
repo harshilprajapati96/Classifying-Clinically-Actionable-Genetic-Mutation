@@ -24,7 +24,8 @@
 
 
 
-function [svm_group, cv_ccr] = training_SA_SVM(X_train,Y_train,alpha,tuning,mode)
+function [svm_group, cv_ccr] = training_SA_SVM(X_train,Y_train,alpha,tuning...
+    ,mode,k_fold_bool)
 
 %% K-fold for selectring tuning parameter
 k = 5; % K-fold parameter
@@ -49,29 +50,39 @@ warning
 
 switch mode
     case 'ovo'
-       
+        
         cv_ccr = zeros(tot_m,length(tuning));
         for i = 1:tot_m % interate through all pairs of classes
             [X_train_1_2, Y_train_1_2] ...
                 = ovo(pair_i(i),pair_j(i),X_train,Y_train); % prepare 2 Class X and Y_train
-            kfold = cvpartition(length(Y_train_1_2),'KFold',k);
-            svm_ccr = zeros(k,1);
-            for i_fold = 1:k
-                svm_group(i_fold) = svmtrain(X_train_1_2(training(kfold,i_fold),:),...
-                    Y_train_1_2(training(kfold,i_fold),:),...
+            if(k_fold_bool)
+                kfold = cvpartition(length(Y_train_1_2),'KFold',k);
+                svm_ccr = zeros(k,1);
+                for i_fold = 1:k
+                    svm_group(i_fold) = svmtrain(X_train_1_2(training(kfold,i_fold),:),...
+                        Y_train_1_2(training(kfold,i_fold),:),...
+                        'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false');
+                    
+                    %                 temp = svmtrain(X_train_1_2(training(kfold,i_fold),:),...
+                    %                     Y_train_1_2(training(kfold,i_fold),:),...
+                    %                     'autoscale','false');
+                    % svm_group = fitcsvm(X_train_1_2(training(kfold,i_fold),:),...
+                    %                     Y_train_1_2(training(kfold,i_fold),:),...
+                    %                     'KernelFunction','sensing2kernal');
+                    
+                    svm_ccr(i_fold) = mean(svmclassify(svm_group(i_fold),X_train_1_2(test(kfold,i_fold),:))...
+                        ==Y_train_1_2(test(kfold,i_fold),:));
+                end
+                cv_ccr(i,:) = mean(svm_ccr);
+            else % not usint k-fold
+                svm_group = svmtrain(X_train_1_2,...
+                    Y_train_1_2,...
                     'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false');
-
-% svm_group = fitcsvm(X_train_1_2(training(kfold,i_fold),:),...
-%                     Y_train_1_2(training(kfold,i_fold),:),...
-%                     'KernelFunction','sensing2kernal');
-                
-                svm_ccr(i_fold) = mean(svmclassify(svms(i_fold),X_train_1_2(test(kfold,i_fold),:))...
-                    ==Y_train_1_2(test(kfold,i_fold),:));
+                cv_ccr(i,:) = mean(svmclassify(svm_group,X_train_1_2)...
+                    ==Y_train_1_2);
             end
-            cv_ccr(i,:) = mean(svm_ccr);
-            
         end
-        
+
     case 'ova'
         svm_group = zeros(m,1);
         parfor i = 1:m

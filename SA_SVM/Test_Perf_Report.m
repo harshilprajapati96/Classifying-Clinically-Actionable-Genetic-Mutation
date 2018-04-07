@@ -3,7 +3,7 @@
 % Bowen Song U04079758
 
 %% News 20 group
-% preprocessing 
+% preprocessing
 tic
 Preprocessing_new20;
 disp("Preprocessing is done:")
@@ -11,15 +11,21 @@ toc
 % use data with filtered stoped words
 %% Training woth OVO
 tic
-tuning = [100 150 200]; % tuning prarmeter for US new is suggested to be 150 at best
+tuning = [150 200]; % tuning prarmeter for US new is suggested to be 150 at best
 for i_tuning = 1:length(tuning)
-[X_train_processed,alpha] = RRN_preprocessing(X_train_woSTOP,tuning(i_tuning),length(vocab));
-[svm_group_ovo, ccrs] = training_SA_SVM(X_train_processed,Y_train,...
-    alpha,tuning(i_tuning),'ovo');
+    disp("X_train preperation time:")
+    tic
+    [X_train_processed,alpha] = RRN_preprocessing(X_train_woSTOP,tuning(i_tuning),length(vocab));
+    toc
+    disp("Training time:")
+    tic
+    [svm_group_ovo, ccrs] = training_SA_SVM(X_train_processed,Y_train,...
+        alpha,tuning(i_tuning),'ovo',false);
+    toc
 end
 disp("Training for OVO is done:")
 toc
-% 10 parameters 
+% 10 parameters
 % without parfor
 % with most inner parfor
 % with outter parfor
@@ -37,7 +43,7 @@ tic
 
 prediction_ovo = zeros(length(Y_test),length(svm_group_ovo));
 parfor i = 1:length(svm_group_ovo)
-prediction_ovo(:,i) = svmclassify(svm_group_ovo(i),X_test);
+    prediction_ovo(:,i) = svmclassify(svm_group_ovo(i),X_test);
 end
 
 prediction_ovo = mode(prediction_ovo,2);
@@ -53,7 +59,7 @@ toc
 tic
 prediction_ova = zeros(length(Y_test),length(svm_group_ova));
 parfor i = 1:length(svm_group_ova)
-prediction_ova(:,i) = svmclassify(svm_group_ova(i),X_test);
+    prediction_ova(:,i) = svmclassify(svm_group_ova(i),X_test);
 end
 
 prediction_ova = mode(prediction_ova,2);
