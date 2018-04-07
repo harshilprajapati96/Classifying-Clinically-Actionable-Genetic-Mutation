@@ -10,10 +10,17 @@
 
 
 %% ---------------------------------------------------%%
-% X_train, Y_train, and vocab_len should be raw data
-% (docID,WordNum,Occurrance),(Class label for each unique doc)
-% tuning should be array of cadidates
+% Input: X_train, Y_train,alpha,tuning and mode
+% X_train: (uniquedoc) X (N number of words randomly picked) of the word
+% occurernace
+% Y_train: (uniquedoc) X 1 of class label
+% alpha: a constant term of Kernal in log
+% tuning: N 1X1
+% mode: 'ovo' and 'ova'
 
+
+%% ---------------------------------------------------%%
+% Output: svm_group an array of structs of svm classifyer
 
 
 
@@ -44,22 +51,22 @@ switch mode
     case 'ovo'
         svm_group = zeros(tot_m,1);
         cv_ccr = zeros(tot_m,length(tuning));
-        for j = 1:length(tuning)
-            parfor i = 1:tot_m
-                [X_train_1_2, Y_train_1_2] ...
-                    = ovo(pair_i(i),pair_j(i),X_train,Y_train);
-                kfold = cvpartition(length(Y_train_1_2),'KFold',k);
-                svm_ccr = zeros(k,length(tuning));
-                for i_fold = 1:k
-                    svms(i_fold,j) = svmtrain(X_train_1_2(training(kfold,i_fold),:),Y_train_1_2(training(kfold,i_fold),:),...
-                        'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false');
-                    svm_ccr(i_fold,j) = mean(svmclassify(svms(i_fold,j),X_train_1_2(test(kfold,i_fold),:))...
-                        ==Y_train_1_2(test(kfold,i_fold),:));
-                end
-                cv_ccr(i,:) = mean(svm_ccr);
+        for i = 1:tot_m % interate through all pairs of classes
+            [X_train_1_2, Y_train_1_2] ...
+                = ovo(pair_i(i),pair_j(i),X_train,Y_train); % prepare 2 Class X and Y_train
+            kfold = cvpartition(length(Y_train_1_2),'KFold',k);
+            svm_ccr = zeros(k,1);
+            for i_fold = 1:k
+                svm_group(i_fold,j) = svmtrain(X_train_1_2(training(kfold,i_fold),:),...
+                    Y_train_1_2(training(kfold,i_fold),:),...
+                    'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false');
+                svm_ccr(i_fold,j) = mean(svmclassify(svms(i_fold,j),X_train_1_2(test(kfold,i_fold),:))...
+                    ==Y_train_1_2(test(kfold,i_fold),:));
             end
+            cv_ccr(i,:) = mean(svm_ccr);
+            
         end
-
+        
     case 'ova'
         svm_group = zeros(m,1);
         parfor i = 1:m
@@ -79,7 +86,6 @@ switch mode
             cv_ccr = mean(svm_ccr);
             [~,star_ind] = max(cv_ccr);
             star = tuning(star_ind);
-            
             svm_group(i) = svmtrain(X_train_1_2,Y_train_1_2,...
                 'autoscale','false');
             

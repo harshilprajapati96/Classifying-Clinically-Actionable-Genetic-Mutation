@@ -14,7 +14,8 @@ tic
 tuning = [100 150 200]; % tuning prarmeter for US new is suggested to be 150 at best
 for i_tuning = 1:length(tuning)
 [X_train_processed,alpha] = RRN_preprocessing(X_train_woSTOP,tuning(i_tuning),length(vocab));
-[svm_group_ovo, ccrs] = training_SA_SVM(X_train_processed,Y_train,Y_train_expand,alpha,tuning(i_tuning),'ova');
+[svm_group_ovo, ccrs] = training_SA_SVM(X_train_processed,Y_train,Y_train_expand,...
+    alpha,tuning(i_tuning),'ova');
 end
 disp("Training for OVO is done:")
 toc
@@ -24,7 +25,6 @@ toc
 % with outter parfor
 %% Training woth OVA
 tic
-tuning = [1 1 1 1 1 11 1 1 1 1];
 svm_group_ova = training_SA_SVM(X_train_woSTOP,Y_train,Y_train_expand,length(vocab),tuning,'ova');
 disp("Training for OVA is done:")
 toc
