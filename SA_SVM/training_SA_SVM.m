@@ -24,7 +24,7 @@
 
 
 
-function svm_group = training_SA_SVM(X_train,Y_train,alpha,tuning,mode)
+function [svm_group, cv_ccr] = training_SA_SVM(X_train,Y_train,alpha,tuning,mode)
 
 %% K-fold for selectring tuning parameter
 k = 5; % K-fold parameter
@@ -49,7 +49,7 @@ warning
 
 switch mode
     case 'ovo'
-        svm_group = zeros(tot_m,1);
+       
         cv_ccr = zeros(tot_m,length(tuning));
         for i = 1:tot_m % interate through all pairs of classes
             [X_train_1_2, Y_train_1_2] ...
@@ -57,10 +57,15 @@ switch mode
             kfold = cvpartition(length(Y_train_1_2),'KFold',k);
             svm_ccr = zeros(k,1);
             for i_fold = 1:k
-                svm_group(i_fold,j) = svmtrain(X_train_1_2(training(kfold,i_fold),:),...
+                svm_group(i_fold) = svmtrain(X_train_1_2(training(kfold,i_fold),:),...
                     Y_train_1_2(training(kfold,i_fold),:),...
                     'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false');
-                svm_ccr(i_fold,j) = mean(svmclassify(svms(i_fold,j),X_train_1_2(test(kfold,i_fold),:))...
+
+% svm_group = fitcsvm(X_train_1_2(training(kfold,i_fold),:),...
+%                     Y_train_1_2(training(kfold,i_fold),:),...
+%                     'KernelFunction','sensing2kernal');
+                
+                svm_ccr(i_fold) = mean(svmclassify(svms(i_fold),X_train_1_2(test(kfold,i_fold),:))...
                     ==Y_train_1_2(test(kfold,i_fold),:));
             end
             cv_ccr(i,:) = mean(svm_ccr);
