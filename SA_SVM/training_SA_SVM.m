@@ -83,8 +83,8 @@ switch mode
                 svm_group(i) = svmtrain(X_train_1_2,...
                     Y_train_1_2,...
                     'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false','Options',options);
-                
             end
+            cv_ccr = -1;
         end
         
     case 'ova'
