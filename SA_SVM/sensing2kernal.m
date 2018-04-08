@@ -8,7 +8,7 @@ function K2 = sensing2kernal(x_hat_i,x_hat_j,alpha)
 % x_hat_i: doc X N
 K2 = zeros(size(x_hat_i,1),size(x_hat_j,1));
 
-for i = 1:size(x_hat_i,1)
+parfor i = 1:size(x_hat_i,1)
 K2(i,:) = sum(gammaln(x_hat_i(i,:)+x_hat_j+1)-gammaln(x_hat_i(i,:)+1)-gammaln(x_hat_j+1),2)+alpha;
 % Circular shift Doc
 %x_hat_j = circshift(x_hat_j,-1,1);

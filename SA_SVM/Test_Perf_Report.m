@@ -25,6 +25,7 @@ for i_tuning = 1:length(tuning)
 end
 disp("Training for OVO is done:")
 toc
+save result.mat svm_group_ovo ccrs
 % 10 parameters
 % without parfor
 % with most inner parfor

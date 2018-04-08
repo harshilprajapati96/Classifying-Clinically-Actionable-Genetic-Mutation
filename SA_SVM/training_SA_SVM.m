@@ -58,7 +58,7 @@ switch mode
             if(k_fold_bool)
                 kfold = cvpartition(length(Y_train_1_2),'KFold',k);
                 svm_ccr = zeros(k,1);
-                for i_fold = 1:k
+                parfor i_fold = 1:k
                     svm_group(i_fold) = svmtrain(X_train_1_2(training(kfold,i_fold),:),...
                         Y_train_1_2(training(kfold,i_fold),:),...
                         'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false','Options',options);
