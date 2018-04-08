@@ -23,10 +23,11 @@ for i_tuning = 1:length(tuning)
         alpha,tuning(i_tuning),'ovo',false);
     toc
 end
-testing_SA_SVM(X_test_woSTOP,Y_test,svm_group_ovo,'ovo')
+prediction = testing_SA_SVM(X_test_woSTOP,length(unique(Y_train)),svm_group_ovo,'ovo');
+ccr = mean(Y_train==prediction);
 disp("Training for OVO is done:")
 toc
-save result.mat svm_group_ovo ccrs
+save result.mat svm_group_ovo prediction ccr
 % 10 parameters
 % without parfor
 % with most inner parfor
