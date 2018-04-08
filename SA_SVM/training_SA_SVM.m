@@ -47,7 +47,7 @@ tot_m = m*(m-1)/2; % total time of itoration for OvO
 %% start training
 warning('off','all')
 warning
-
+options.MaxIter = 1e5;
 switch mode
     case 'ovo'
         
@@ -61,7 +61,7 @@ switch mode
                 for i_fold = 1:k
                     svm_group(i_fold) = svmtrain(X_train_1_2(training(kfold,i_fold),:),...
                         Y_train_1_2(training(kfold,i_fold),:),...
-                        'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false');
+                        'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false','Options',options);
                     
                     %                 temp = svmtrain(X_train_1_2(training(kfold,i_fold),:),...
                     %                     Y_train_1_2(training(kfold,i_fold),:),...
