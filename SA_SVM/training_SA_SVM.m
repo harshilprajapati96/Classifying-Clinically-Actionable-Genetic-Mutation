@@ -26,7 +26,6 @@
 
 function [svm_group, cv_ccr] = training_SA_SVM(X_train,Y_train,alpha,tuning...
     ,mode,k_fold_bool)
-
 %% K-fold for selectring tuning parameter
 k = 5; % K-fold parameter
 m = length(unique(Y_train));
@@ -74,12 +73,11 @@ switch mode
                         ==Y_train_1_2(test(kfold,i_fold),:));
                 end
                 cv_ccr(i,:) = mean(svm_ccr);
-            else % not usint k-fold
+            else % not usint k-fold performing final taining
+                % train on entire training data
                 svm_group = svmtrain(X_train_1_2,...
                     Y_train_1_2,...
                     'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false');
-                cv_ccr(i,:) = mean(svmclassify(svm_group,X_train_1_2)...
-                    ==Y_train_1_2);
             end
         end
 

@@ -20,9 +20,10 @@ for i_tuning = 1:length(tuning)
     disp("Training time:")
     tic
     [svm_group_ovo, ccrs] = training_SA_SVM(X_train_processed,Y_train,...
-        alpha,tuning(i_tuning),'ovo',true);
+        alpha,tuning(i_tuning),'ovo',false);
     toc
 end
+testing_SA_SVM(X_test_woSTOP,Y_test,svm_group_ovo,'ovo')
 disp("Training for OVO is done:")
 toc
 save result.mat svm_group_ovo ccrs
