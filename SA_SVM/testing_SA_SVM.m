@@ -40,7 +40,7 @@ switch mode
             % give result
             prediction(:,i) = svmclassify(svm_group(i),X_test);
         end
-        prediction = mode(prediction,2);
+        
     case 'ova'
         
 end
