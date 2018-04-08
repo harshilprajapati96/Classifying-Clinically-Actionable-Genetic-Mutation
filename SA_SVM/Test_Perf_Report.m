@@ -25,7 +25,7 @@ for i_tuning = 1:length(tuning)
 end
 star_tuning = 1; % should be set to the best cv-CCR
 [X_test_processed,alpha] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
-prediction = testing_SA_SVM(X_test_woSTOP,length(unique(Y_train)),svm_group_ovo,'ovo');
+prediction = testing_SA_SVM(X_test_processed,length(unique(Y_train)),svm_group_ovo,'ovo');
 ccr = mean(Y_train==prediction);
 disp("Training for OVO is done:")
 toc
