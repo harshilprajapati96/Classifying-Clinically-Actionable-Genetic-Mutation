@@ -26,7 +26,7 @@ m = length(unique(Y_test)); % we are assumeing all the test class exist in train
 switch mode
     case 'ovo'
         
-        prediction = zeros(length(Y_test),length(svms));
+        prediction = zeros(length(Y_test),length(svm_group));
         %% prepare index for parallel computing
         pair_i = [];
         pair_j = [];
