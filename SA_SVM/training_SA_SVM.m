@@ -77,7 +77,7 @@ switch mode
                 % train on entire training data
                 svm_group = svmtrain(X_train_1_2,...
                     Y_train_1_2,...
-                    'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false');
+                    'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false','Options',options);
             end
         end
 
