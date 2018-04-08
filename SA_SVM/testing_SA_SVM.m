@@ -24,9 +24,12 @@ function prediction = testing_SA_SVM(X_test,svm_group)
 
 prediction = zeros(size(X_test,1),length(svm_group));
 
-parfor i = 1:length(svm_group)
+for i = 1:length(svm_group)
     % give result
+    tic
+    disp("Prediction Time per svm_group")
     prediction(:,i) = svmclassify(svm_group(i),X_test);
+    toc
 end
 
 end
