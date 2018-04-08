@@ -25,7 +25,7 @@ function prediction = testing_SA_SVM(X_test,m,svm_group,mode)
 switch mode
     case 'ovo'
         
-        prediction = zeros(m,length(svm_group));
+        prediction = zeros(size(X_test,1),length(svm_group));
         %% prepare index for parallel computing
         pair_i = [];
         pair_j = [];
@@ -36,7 +36,7 @@ switch mode
             end
         end
         tot_m = m*(m-1)/2; % total time of itoration for OvO
-        parfor i = 1:tot_m
+        parfor i = 1:length(svm_group)
             % give result
             prediction(:,i) = svmclassify(svm_group(i),X_test);
         end
