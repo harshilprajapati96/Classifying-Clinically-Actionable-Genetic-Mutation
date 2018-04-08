@@ -49,12 +49,12 @@ warning
 options.MaxIter = 1e5;
 switch mode
     case 'ovo'
-        
-        cv_ccr = zeros(tot_m,length(tuning));
-        for i = 1:tot_m % interate through all pairs of classes
-            [X_train_1_2, Y_train_1_2] ...
-                = ovo(pair_i(i),pair_j(i),X_train,Y_train); % prepare 2 Class X and Y_train
-            if(k_fold_bool)
+        if(k_fold_bool)
+            cv_ccr = zeros(tot_m,length(tuning));
+            for i = 1:tot_m % interate through all pairs of classes
+                [X_train_1_2, Y_train_1_2] ...
+                    = ovo(pair_i(i),pair_j(i),X_train,Y_train); % prepare 2 Class X and Y_train
+                
                 kfold = cvpartition(length(Y_train_1_2),'KFold',k);
                 svm_ccr = zeros(k,1);
                 parfor i_fold = 1:k
@@ -73,14 +73,20 @@ switch mode
                         ==Y_train_1_2(test(kfold,i_fold),:));
                 end
                 cv_ccr(i,:) = mean(svm_ccr);
-            else % not usint k-fold performing final taining
-                % train on entire training data
-                svm_group = svmtrain(X_train_1_2,...
+            end
+        else % not usint k-fold performing final taining
+            % train on entire training data
+            parfor i = 1:tot_m % interate through all pairs of classes
+                [X_train_1_2, Y_train_1_2] ...
+                    = ovo(pair_i(i),pair_j(i),X_train,Y_train);
+                warning('off','all')
+                svm_group(i) = svmtrain(X_train_1_2,...
                     Y_train_1_2,...
                     'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false','Options',options);
+                
             end
         end
-
+        
     case 'ova'
         svm_group = zeros(m,1);
         parfor i = 1:m
