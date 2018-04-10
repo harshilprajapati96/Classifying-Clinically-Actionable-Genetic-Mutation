@@ -82,7 +82,7 @@ switch mode
                 warning('off','all')
                 svm_group(i) = svmtrain(X_train_1_2,...
                     Y_train_1_2,...
-                    'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false','Options',options);
+                    'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'Options',options); %'autoscale','false',
             end
             cv_ccr = -1;
         end
