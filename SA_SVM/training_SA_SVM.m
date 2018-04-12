@@ -57,10 +57,11 @@ switch mode
                 
                 kfold = cvpartition(length(Y_train_1_2),'KFold',k);
                 svm_ccr = zeros(k,1);
-                parfor i_fold = 1:k
+                for i_fold = 1:k
                     svm_group(i_fold) = svmtrain(X_train_1_2(training(kfold,i_fold),:),...
                         Y_train_1_2(training(kfold,i_fold),:),...
-                        'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'autoscale','false','Options',options);
+                        'kernel_function',@(u,v) sensing2kernal(u,v,alpha)...
+                        ,'Options',options,'kernelcachelimit',Inf);
                     
                     %                 temp = svmtrain(X_train_1_2(training(kfold,i_fold),:),...
                     %                     Y_train_1_2(training(kfold,i_fold),:),...
@@ -76,39 +77,48 @@ switch mode
             end
         else % not usint k-fold performing final taining
             % train on entire training data
-            parfor i = 1:tot_m % interate through all pairs of classes
+            for i = 1:tot_m % interate through all pairs of classes % parfor
                 [X_train_1_2, Y_train_1_2] ...
                     = ovo(pair_i(i),pair_j(i),X_train,Y_train);
                 warning('off','all')
-                svm_group(i) = svmtrain(X_train_1_2,...
-                    Y_train_1_2,...
-                    'kernel_function',@(u,v) sensing2kernal(u,v,alpha),'Options',options); %'autoscale','false',
+                svm_group(i) = svmtrain(X_train_1_2,Y_train_1_2,...
+                    'kernel_function',@(u,v) sensing2kernal(u,v,alpha),...
+                    'Options',options,'kernelcachelimit',Inf); %'autoscale','false',
             end
             cv_ccr = -1;
         end
         
     case 'ova'
-        svm_group = zeros(m,1);
-        parfor i = 1:m
-            [X_train_1_2, Y_train_1_2] ...
-                = ova(pair_i(i),X_train,Y_train);
-            kfold = cvpartition(length(Y_train_1_2),'KFold',k);
-            svm_ccr = zeros(k,length(tuning));
-            for j = 1:length(tuning)
+        if(k_fold_bool)
+            for i = 1:m % interate through all pairs of classes
+                [X_train_1_2, Y_train_1_2] ...
+                    = ova(pair_i(i),X_train,Y_train); 
+                svm_ccr = zeros(k,length(tuning));
+                kfold = cvpartition(length(Y_train_1_2),'KFold',k);
                 for i_fold = 1:k
-                    svms = svmtrain(X_train_1_2(training(kfold,i_fold),:),Y_train_1_2(training(kfold,i_fold),:),...
-                        'autoscale','false');
-                    svm_ccr(i_fold,j) = mean(svmclassify(svms,X_train_1_2(test(kfold,i_fold),:))...
+                    svm_group(i_fold) = svmtrain(X_train_1_2(training(kfold,i_fold),:),...
+                        Y_train_1_2(training(kfold,i_fold),:),...
+                        'kernel_function',@(u,v) sensing2kernal(u,v,alpha),...
+                        'kernelcachelimit',Inf,'Options',options);
+                    
+                    svm_ccr(i_fold) = mean(svmclassify(svm_group(i_fold),X_train_1_2(test(kfold,i_fold),:))...
                         ==Y_train_1_2(test(kfold,i_fold),:));
                 end
+                cv_ccr(i,:) = mean(svm_ccr);
             end
-            % elect the best N parameter
-            cv_ccr = mean(svm_ccr);
-            [~,star_ind] = max(cv_ccr);
-            star = tuning(star_ind);
-            svm_group(i) = svmtrain(X_train_1_2,Y_train_1_2,...
-                'autoscale','false');
-            
+        else % not usint k-fold performing final taining
+            % train on entire training data
+            for i = 1:tot_m % interate through all pairs of classes % parfor
+                [X_train_1_2, Y_train_1_2] ...
+                    = ova(pair_i(i),X_train,Y_train);
+                warning('off','all')
+                svm_group(i) = svmtrain(X_train_1_2,...
+                    Y_train_1_2,...
+                    'kernel_function',@(u,v) sensing2kernal(u,v,alpha)...
+                    ,'Options',options,'kernelcachelimit',Inf); %'autoscale','false',
+            end
+            cv_ccr = -1;
         end
+       
         
 end

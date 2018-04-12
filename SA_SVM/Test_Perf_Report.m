@@ -20,19 +20,19 @@ for i_tuning = 1:length(tuning)
     disp("Training time:")
     tic
     [svm_group_ovo, ~] = training_SA_SVM(X_train_processed,Y_train,...
-        alpha,tuning(i_tuning),'ovo',false);
+        alpha,tuning(i_tuning),'ova',false);
     toc
 end
 
 star_tuning = 1; % should be set to the best cv-CCR
 [X_test_processed,alpha] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
 disp("Decising time:")
-prediction = testing_SA_SVM(X_test_processed,svm_group_ovo);
+%prediction = testing_SA_SVM(X_test_processed,svm_group_ovo);
 %prediction = mode(prediction,2);
-ccr = mean(Y_train==prediction);
+%ccr = mean(Y_train==prediction);
 disp("Training for OVO is done:")
 toc
-save result.mat svm_group_ovo prediction ccr
+save('result.mat')
 % 10 parameters
 % without parfor
 % with most inner parfor
