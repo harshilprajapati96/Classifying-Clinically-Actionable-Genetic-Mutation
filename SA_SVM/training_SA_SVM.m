@@ -116,6 +116,7 @@ switch mode
                     Y_train_1_2,...
                     'kernel_function',@(u,v) sensing2kernal(u,v,alpha)...
                     ,'Options',options,'kernelcachelimit',Inf); %'autoscale','false',
+                sprintf("we finished class %d",i)
             end
             cv_ccr = -1;
         end
