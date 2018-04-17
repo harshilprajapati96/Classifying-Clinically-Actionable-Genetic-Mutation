@@ -28,7 +28,8 @@ for i = 1:length(svm_group)
     % give result
     tic
     disp("Prediction Time per svm_group")
-    prediction(:,i) = svmclassify(svm_group(i),X_test);
+%     prediction(:,i) = svmclassify(svm_group(i),X_test);
+    prediction(:,i) = predict(svm_group(i),X_test);
     toc
 end
 

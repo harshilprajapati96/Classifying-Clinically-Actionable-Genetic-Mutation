@@ -18,8 +18,10 @@ for i_tuning = 1:length(tuning)
     [X_train_processed,alpha] = RRN_preprocessing(X_train_woSTOP,tuning(i_tuning),length(vocab));
     toc
     disp("Training time:")
+    global AL
+    AL = alpha;
     tic
-    [svm_group_ovo, ~] = training_SA_SVM(X_train_processed,Y_train,...
+    [svm_group_ova, ~] = training_SA_SVM(X_train_processed,Y_train,...
         alpha,tuning(i_tuning),'ova',false);
     toc
 end
