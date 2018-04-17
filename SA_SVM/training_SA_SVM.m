@@ -46,7 +46,7 @@ tot_m = m*(m-1)/2; % total time of itoration for OvO
 %% start training
 warning('off','all')
 warning
-options.MaxIter = 1e5;
+options.MaxIter = inf;
 switch mode
     case 'ovo'
         if(k_fold_bool)
