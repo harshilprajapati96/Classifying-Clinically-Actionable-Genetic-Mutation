@@ -49,6 +49,7 @@ warning
 options.MaxIter = inf;
 switch mode
     case 'ovo'
+        
         if(k_fold_bool)
             cv_ccr = zeros(tot_m,length(tuning));
             for i = 1:tot_m % interate through all pairs of classes
@@ -77,13 +78,24 @@ switch mode
             end
         else % not usint k-fold performing final taining
             % train on entire training data
+            svm_group = cell(tot_m,1);
             for i = 1:tot_m % interate through all pairs of classes % parfor
                 [X_train_1_2, Y_train_1_2] ...
                     = ovo(pair_i(i),pair_j(i),X_train,Y_train);
                 warning('off','all')
-                svm_group(i) = svmtrain(X_train_1_2,Y_train_1_2,...
-                    'kernel_function',@(u,v) sensing2kernal(u,v,alpha),...
-                    'Options',options,'kernelcachelimit',Inf); %'autoscale','false',
+                tic
+                svm_group{i} = svmtrain(X_train_1_2,Y_train_1_2,...
+                    'kernel_function',@(u,v) sensing2kernal(u,v),...
+                    'Options',options,'kernelcachelimit',Inf,'autoscale','false'); %'autoscale','false',
+                mean(svmclassify(svm_group{i},X_train_1_2)==Y_train_1_2)
+                sprintf("we finished class %d",i)
+                toc
+%                  tic
+%                     svm_group{i} = svmtrain(X_train_1_2,Y_train_1_2,...
+%                         'autoscale','false','kernel_function',@(u,v) sensing2kernal(u,v),'kernelcachelimit',Inf,'Options',options);
+%                     sprintf("we finished class %d",i)
+% %             mean(svmclassify(svm_group{i},X_train_1_2(1:500,:))==Y_train_1_2(1:500))
+%            toc
             end
             cv_ccr = -1;
         end
@@ -109,7 +121,7 @@ switch mode
         else % not usint k-fold performing final taining
             % train on entire training data
             svm_group = cell(m,1);
-            parfor i = 1:m % interate through all pairs of classes % parfor
+            for i = 1:m % interate through all pairs of classes % parfor
                 [X_train_1_2, Y_train_1_2] ...
                     = ova(pair_i(i),X_train,Y_train);
                 warning('off','all')
@@ -119,14 +131,25 @@ switch mode
 %                     ,'Options',options,'kernelcachelimit',Inf); %'autoscale','false',
 % global it
 % it = 0;
-%                 svm_group{i} = fitcsvm(X_train_1_2,Y_train_1_2,...
+% tic
+%                 svm_group{i} = fitcsvm(X_train_1_2(1:500,:),Y_train_1_2(1:500),...
 %                     'KernelFunction','sensing2kernal');
+%                 prediction1 = predict(svm_group{i},X_train_1_2(1:500,:));
+%                 mean(prediction1==Y_train_1_2(1:500))
+% toc
 %                 sprintf("we finished class %d",i)
+% tic
+% t = templateSVM('Standardize',1,'KernelFunction','linear');
+% mdl = fitcecoc(X_train_1_2,Y_train_1_2);
+% mean(predict(mdl,X_train_1_2)==Y_train_1_2)
+% toc
 
-tic
-                    svm_group{i} = svmtrain(X_train_1_2,Y_train_1_2,'autoscale','false','kernel_function','linear','kernelcachelimit',Inf);
-            
-            toc
+ tic
+                    svm_group{i} = svmtrain(X_train_1_2,Y_train_1_2,...
+                        'autoscale','false','kernel_function',@(u,v) sensing2kernal(u,v),'kernelcachelimit',Inf,'Options',options);
+                    sprintf("we finished class %d",i)
+%             mean(svmclassify(svm_group{i},X_train_1_2(1:500,:))==Y_train_1_2(1:500))
+           toc
 
             end
             cv_ccr = -1;

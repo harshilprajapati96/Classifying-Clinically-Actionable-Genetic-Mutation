@@ -14,29 +14,34 @@ tic
 tuning = 150; % tuning prarmeter for US new is suggested to be 150 at best
 for i_tuning = 1:length(tuning)
     disp("X_train preperation time:")
+    global alpha
     tic
-%     [X_train_processed,alpha] = RRN_preprocessing(X_train_woSTOP,tuning(i_tuning),length(vocab));
-    X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
+     [X_train_processed,alpha] = RRN_preprocessing(X_train_woSTOP,tuning(i_tuning),length(vocab));
+    %X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
     toc
     disp("Training time:")
-%     global AL
-%     AL = alpha;
+
+
+% tic
+% t = templateSVM('Standardize',1,'KernelFunction','linear');
+% mdl = fitcecoc(X_train_processed(1:5000,:),Y_train(1:5000),'Learners',t);
+% mean(predict(mdl,X_train_processed(1:5000,:))==Y_train(1:5000))
+% toc
+
 alpha = 12;% to be deleted
     tic
-    [svm_group_ova, ~] = training_SA_SVM(X_train_processed,Y_train,...
-        alpha,tuning(i_tuning),'ova',false);
+    [svm_group_ovo, ~] = training_SA_SVM(X_train_processed,Y_train,...
+        alpha,tuning(i_tuning),'ovo',false);
     toc
 end
 
 star_tuning = 1; % should be set to the best cv-CCR
-% [X_test_processed,alpha] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
-X_test_processed = Norm_preprocessing(X_test_woSTOP,length(vocab));
+[X_test_processed,alpha] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
+%X_test_processed = Norm_preprocessing(X_test_woSTOP,length(vocab));
 disp("Decising time:")
 
-prediction = zeros(length(Y_test),length(svm_group_ova));
-parfor i = 1:length(svm_group_ova)
-prediction(:,i) = testing_SA_SVM(X_test_processed,svm_group_ova{i});
-end
+prediction = testing_SA_SVM(X_test_processed,svm_group_ovo);
+
 prediction = mode(prediction,2);
 ccr = mean(Y_test==prediction);
 disp("Training for OVO is done:")
