@@ -16,9 +16,9 @@ function [X_train,Y_train]...
 Y_train(Y_train~=class)=-1;
 Y_train(Y_train==class)=1;
 % make sure there is no zero element in the matrix
-if (nnz(X_train)/numel(X_train) ~= 1)
-    error("OVA X_train_1_2: class %d and %d contains zero elements"...
-        ,class1,class2)
-end
+% if (nnz(X_train)/numel(X_train) ~= 1)
+%     error("OVA X_train_1_2: class %d and %d contains zero elements"...
+%         ,class1,class2)
+% end
 
 end

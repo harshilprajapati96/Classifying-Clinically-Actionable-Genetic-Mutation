@@ -11,15 +11,17 @@ toc
 % use data with filtered stoped words
 %% Training woth OVO
 tic
-tuning = [150]; % tuning prarmeter for US new is suggested to be 150 at best
+tuning = 150; % tuning prarmeter for US new is suggested to be 150 at best
 for i_tuning = 1:length(tuning)
     disp("X_train preperation time:")
     tic
-    [X_train_processed,alpha] = RRN_preprocessing(X_train_woSTOP,tuning(i_tuning),length(vocab));
+%     [X_train_processed,alpha] = RRN_preprocessing(X_train_woSTOP,tuning(i_tuning),length(vocab));
+    X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
     toc
     disp("Training time:")
-    global AL
-    AL = alpha;
+%     global AL
+%     AL = alpha;
+alpha = 12;% to be deleted
     tic
     [svm_group_ova, ~] = training_SA_SVM(X_train_processed,Y_train,...
         alpha,tuning(i_tuning),'ova',false);
@@ -27,11 +29,15 @@ for i_tuning = 1:length(tuning)
 end
 
 star_tuning = 1; % should be set to the best cv-CCR
-[X_test_processed,alpha] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
+% [X_test_processed,alpha] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
+[X_test_processed,alpha] = Norm_preprocessing(X_test_woSTOP,length(vocab));
 disp("Decising time:")
-%prediction = testing_SA_SVM(X_test_processed,svm_group_ovo);
-%prediction = mode(prediction,2);
-%ccr = mean(Y_train==prediction);
+label_predict = zeros(length(svm_group_ova),1);
+for i = 1:length(svm_group_ova)
+prediction = testing_SA_SVM(X_test_processed,svm_group_ova);
+label_predict(i) = mode(prediction,2);
+end
+ccr = mean(Y_train==label_predict);
 disp("Training for OVO is done:")
 toc
 save('result.mat')
