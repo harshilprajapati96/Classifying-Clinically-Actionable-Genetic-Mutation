@@ -34,11 +34,11 @@ X_test_processed = Norm_preprocessing(X_test_woSTOP,length(vocab));
 disp("Decising time:")
 
 prediction = zeros(length(Y_test),length(svm_group_ova));
-for i = 1:length(svm_group_ova)
+parfor i = 1:length(svm_group_ova)
 prediction(:,i) = testing_SA_SVM(X_test_processed,svm_group_ova{i});
 end
 prediction = mode(prediction,2);
-ccr = mean(Y_test==label_predict);
+ccr = mean(Y_test==prediction);
 disp("Training for OVO is done:")
 toc
 save('result.mat')
