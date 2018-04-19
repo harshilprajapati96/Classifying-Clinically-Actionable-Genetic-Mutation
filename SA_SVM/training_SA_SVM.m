@@ -109,7 +109,7 @@ switch mode
         else % not usint k-fold performing final taining
             % train on entire training data
             svm_group = cell(m,1);
-            for i = 1:m % interate through all pairs of classes % parfor
+            parfor i = 1:m % interate through all pairs of classes % parfor
                 [X_train_1_2, Y_train_1_2] ...
                     = ova(pair_i(i),X_train,Y_train);
                 warning('off','all')
@@ -122,10 +122,12 @@ switch mode
 %                 svm_group{i} = fitcsvm(X_train_1_2,Y_train_1_2,...
 %                     'KernelFunction','sensing2kernal');
 %                 sprintf("we finished class %d",i)
+
 tic
                     svm_group{i} = svmtrain(X_train_1_2,Y_train_1_2,'autoscale','false','kernel_function','linear','kernelcachelimit',Inf);
             
             toc
+
             end
             cv_ccr = -1;
         end

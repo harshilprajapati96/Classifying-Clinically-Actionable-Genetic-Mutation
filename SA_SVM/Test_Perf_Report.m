@@ -30,12 +30,12 @@ end
 
 star_tuning = 1; % should be set to the best cv-CCR
 % [X_test_processed,alpha] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
-[X_test_processed,alpha] = Norm_preprocessing(X_test_woSTOP,length(vocab));
+X_test_processed = Norm_preprocessing(X_test_woSTOP,length(vocab));
 disp("Decising time:")
 
 label_predict = zeros(length(svm_group_ova),1);
 for i = 1:length(svm_group_ova)
-prediction = testing_SA_SVM(X_test_processed,svm_group_ova);
+prediction = testing_SA_SVM(X_test_processed,svm_group_ova{i});
 label_predict(i) = mode(prediction,2);
 end
 ccr = mean(Y_train==label_predict);
