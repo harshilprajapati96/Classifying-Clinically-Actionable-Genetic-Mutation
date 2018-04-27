@@ -17,8 +17,10 @@ print(len(vocab))
 def RRNpreprocessing(M,tune,vocablen,special=False):
     u, doc_indices = np.unique(M[:,0],return_inverse=True)
     xTrainProcessed = csr_matrix((M[:,2], (doc_indices,M[:,1])), shape=(len(doc_indices), vocablen)).toarray()
+    prtin(xTrainProcessed)
     alpha = 2*gammaln(tune+1) - gammaln(2*tune+vocablen)
     WordProb = xTrainProcessed/xTrainProcessed.sum(axis=1)
+    print(WordProb)
     if (special):
         for idx, val in enumerate(u):
             print(idx, val)
@@ -29,7 +31,7 @@ def RRNpreprocessing(M,tune,vocablen,special=False):
 #tuning = [150,200]
 itune = 150
 print("tuning at :"+str(itune))
-[xTrainProce,alpha] = RRNpreprocessing(xTrain,itune,len(vocab),True)
+[xTrainProce,alpha] = RRNpreprocessing(xTrain,itune,len(vocab))
 print("Alpha is: "+ str(alpha))
 print("Xtrain is :"+str(xTrainProce))
 
