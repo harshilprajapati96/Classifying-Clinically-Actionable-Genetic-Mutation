@@ -28,7 +28,7 @@ for i_tuning = 1:length(tuning)
 % mean(predict(mdl,X_train_processed(1:5000,:))==Y_train(1:5000))
 % toc
 
-alpha = 12;% to be deleted
+
     tic
     [svm_group_ovo, ~] = training_SA_SVM(X_train_processed,Y_train,...
         alpha,tuning(i_tuning),'ovo',false);

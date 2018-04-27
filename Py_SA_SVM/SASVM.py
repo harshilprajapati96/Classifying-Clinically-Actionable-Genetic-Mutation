@@ -4,4 +4,10 @@ from pyspark.mllib.util import MLUtils
 from pyspark import SparkContext, SparkConf
 
 sc = SparkContext.getOrCreate(SparkConf().setMaster("local[*]"))
-examples = sc.textFile("../SA_SVM/test.data")
+examples = sc.parallelize("train.data")
+
+
+
+print(examples.SVMWithSGD())
+
+List((4))
