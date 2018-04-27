@@ -16,17 +16,17 @@ print(len(vocab))
 
 def RRNpreprocessing(M,tune,vocablen,special=False):
     u, doc_indices = np.unique(M[:,0],return_inverse=True)
-    xTrainProcessed = csr_matrix((M[:,2], (doc_indices,M[:,1])), shape=(len(doc_indices), vocablen)).toarray()
-    prtin(xTrainProcessed)
+    xProcessed = csr_matrix((M[:,2], (doc_indices,M[:,1])), shape=(len(doc_indices), vocablen)).toarray()
+    print(xProcessed)
     alpha = 2*gammaln(tune+1) - gammaln(2*tune+vocablen)
-    WordProb = xTrainProcessed/xTrainProcessed.sum(axis=1)
-    print(WordProb)
-    if (special):
-        for idx, val in enumerate(u):
-            print(idx, val)
-            xTrainProcessed[idx,:] = np.random.choice(xTrainProcessed[idx,:],tune,WordProb[idx,:])
-        pass
-    return [xTrainProcessed,alpha]
+    WordProb = xProcessed/xProcessed.sum(axis=1)[:,None]
+    # print(WordProb)
+    # if (special):
+    #     for idx, val in enumerate(u):
+    #         print(idx, val)
+    #         xProcessed[idx,:] = np.random.choice(xProcessed[idx,:],tune,WordProb[idx,:])
+    #     pass
+    return [xProcessed,alpha]
 
 #tuning = [150,200]
 itune = 150
