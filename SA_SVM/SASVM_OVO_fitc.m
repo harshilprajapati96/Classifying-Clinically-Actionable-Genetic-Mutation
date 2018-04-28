@@ -42,7 +42,7 @@ for i = 1:numClasses-1
         pair_j = [pair_j ; j];
     end
 end
-parfor j = 1:tot_iter % parfor in the end
+for j = 1:tot_iter % parfor in the end
     tic
     [X_train_1_2, Y_train_1_2] ...
         = ovo(pair_i(j),pair_j(j),X_train_processed,Y_train);
