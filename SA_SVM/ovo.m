@@ -17,9 +17,9 @@ Y_train_1_2 = Y_train.*(Y_train==class2)+ Y_train.*(Y_train==class1);
 X_train_1_2 = X_train(Y_train_1_2~=0,:);
 X_train_1_2 = X_train_1_2(any(X_train_1_2,2),:);
 Y_train_1_2 = Y_train_1_2(any(Y_train_1_2,2),:);
-if (nnz(X_train_1_2)/numel(X_train_1_2) ~= 1)
-    error("OVO X_train_1_2: class %d and %d contains zero elements"...
-        ,class1,class2)
-end
+% if (nnz(X_train_1_2)/numel(X_train_1_2) ~= 1)
+%     error("OVO X_train_1_2: class %d and %d contains zero elements"...
+%         ,class1,class2)
+% end
 
 end

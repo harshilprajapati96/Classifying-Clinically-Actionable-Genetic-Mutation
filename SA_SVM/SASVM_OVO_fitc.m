@@ -25,9 +25,9 @@ tuning = 150; % tuning prarmeter for US new is suggested to be 150 at best
 disp("X_train preperation time:")
 global alphaCust
 tic
-[X_train_processed,alphaCust] = RRN_preprocessing(X_train_woSTOP,tuning,...
-    length(vocab));
-%X_train_processed = full(Norm_preprocessing(X_train_woSTOP,length(vocab)));
+% [X_train_processed,alphaCust] = RRN_preprocessing(X_train_woSTOP,tuning,...
+%     length(vocab));
+X_train_processed = full(Norm_preprocessing(X_train_woSTOP,length(vocab)));
 toc
 classNames = unique(Y_train);
 numClasses = length(classNames);
@@ -47,8 +47,7 @@ for j = 1:tot_iter % parfor in the end
     tic
     [X_train_1_2, Y_train_1_2] ...
         = ovo(pair_i(j),pair_j(j),X_train_processed,Y_train);
-    SVMModel{j} = fitcsvm(X_train_1_2,Y_train_1_2,...
-        'KernelFunction','sensing2kernal');
+    SVMModel{j} = fitcsvm(X_train_1_2,Y_train_1_2);
     disp("predicting one pair")
     toc
 end
@@ -57,8 +56,8 @@ disp("Total Training time:")
 toc
 %% Testing with star_tuning OVO
 star_tuning = 1; % should be set to the best cv-CCR
-[X_test_processed,alphaCust] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
-% X_test_processed = full(Norm_preprocessing(X_test_woSTOP,length(vocab)));
+% [X_test_processed,alphaCust] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
+X_test_processed = full(Norm_preprocessing(X_test_woSTOP,length(vocab)));
 
 disp("Decising time:")
 n = size(X_test_processed,1);
@@ -74,7 +73,7 @@ finaldecision = mode(decision,2);
 
 toc
 disp("Training for OVO is done:")
-OV0ccr = mean(finaldecision==Y_test);
+OVOccr = mean(finaldecision==Y_test);
 
 toc
 save('result_OVO.mat')
