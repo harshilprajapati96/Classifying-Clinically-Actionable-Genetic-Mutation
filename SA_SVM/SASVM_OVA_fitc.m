@@ -9,7 +9,7 @@ Preprocessing_new20;
 disp("Preprocessing is done:")
 toc
 %% toy size
-howmanytoys = 3;
+howmanytoys = 2;
 X_train_woSTOP = X_train_woSTOP(1:find(Y_train_expand<howmanytoys+1,1,'last'),:);
 X_test_woSTOP = X_test_woSTOP(1:find(Y_test_expand<howmanytoys+1,1,'last'),:);
 Y_train = Y_train(1:find(Y_train<howmanytoys+1,1,'last'));
@@ -35,7 +35,7 @@ for j = 1:numClasses
     fprintf("Training class %d",j);
     tic
     SVMModel{j} = fitcsvm(X_train_processed,(Y_train==classNames(j)),...
-        'ClassNames',[false true],'Standardize',true,'KernelFunction','sensing2kernal');
+        'ClassNames',[0 1],'Standardize',true,'KernelFunction','sensing2kernal');
     toc
 end
 for j = 1:numClasses
