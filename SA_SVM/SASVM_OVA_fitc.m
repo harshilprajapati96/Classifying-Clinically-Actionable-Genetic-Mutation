@@ -18,7 +18,6 @@ Y_test = Y_test(1:find(Y_test<howmanytoys+1,1,'last'));
 % preprocess Further with stop wrods technique
 
 %% Training with OVA
-tic
 tuning = 150; % tuning prarmeter for US new is suggested to be 150 at best
 disp("X_train preperation time:")
 global alphaCust
@@ -33,15 +32,19 @@ inds = cell(numClasses,1); % Preallocation
 SVMModel = cell(numClasses,1);
 rng(1); % For reproducibility
 for j = 1:numClasses
+    fprintf("Training class %d",j);
+    tic
     SVMModel{j} = fitcsvm(X_train_processed,(Y_train==classNames(j)),...
         'ClassNames',[false true],'Standardize',true,'KernelFunction','sensing2kernal');
+    toc
 end
 for j = 1:numClasses
+    fprintf("Getting Posterior for class %d",j);
+    tic
     SVMModel{j} = fitPosterior(SVMModel{j});
+    toc
 end
 
-disp("Total Training time:")
-toc
 %% Testing with star_tuning OVA
 star_tuning = 1; % should be set to the best cv-CCR
 [X_test_processed,alphaCust] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
