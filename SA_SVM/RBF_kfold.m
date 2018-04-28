@@ -36,7 +36,7 @@ for t_i = 1:tot_iter
             = ovo(pair_i(t_i),pair_j(t_i),X_train_processed,Y_train);
 for k = 1:length(rbf_sig)
     for j = 1:length(boxcon)
-
+    kfold = cvpartition(length(Y_train_1_2),'KFold',5);
         parfor i = 1:5
             svms = svmtrain(X_train_1_2(training(kfold,i),:),Y_train_1_2(training(kfold,i),:),...
                  'boxconstraint',boxcon(j)*ones(kfold.TrainSize(i),1),...
