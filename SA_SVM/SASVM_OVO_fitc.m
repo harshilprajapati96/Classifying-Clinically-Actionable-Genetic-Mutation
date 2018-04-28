@@ -2,12 +2,18 @@
 % MATLAB R2017b
 % Bowen Song U04079758
 % OVO
-
+clear
+close all
 %% preprocessing
 tic
 Preprocessing_new20;
 disp("Preprocessing is done:")
 toc
+%% toy size
+X_train_woSTOP = X_train_woSTOP(1:110928,:);
+X_test_woSTOP = X_test_woSTOP(1:87201,:);
+Y_train = Y_train(1:1633);
+Y_test = Y_test(1:1098);
 %% use data with filtered stoped words
 % preprocess Further with stop wrods technique
 
@@ -36,16 +42,19 @@ for i = 1:numClasses-1
         pair_j = [pair_j ; j];
     end
 end
-for j = 1:tot_iter % parfor in the end
+parfor j = 1:tot_iter % parfor in the end
+    tic
     [X_train_1_2, Y_train_1_2] ...
         = ovo(pair_i(j),pair_j(j),X_train_processed,Y_train);
     SVMModel{j} = fitcsvm(X_train_1_2,Y_train_1_2,...
         'KernelFunction','sensing2kernal');
+    disp("predicting one pair")
+    toc
 end
 
 disp("Total Training time:")
 toc
-%% Testing with star_tuning OVA
+%% Testing with star_tuning OVO
 star_tuning = 1; % should be set to the best cv-CCR
 [X_test_processed,alphaCust] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
 % X_test_processed = full(Norm_preprocessing(X_test_woSTOP,length(vocab)));
@@ -55,7 +64,10 @@ n = size(X_test_processed,1);
 decision = zeros(n,tot_iter);
 tic
 for j = 1:tot_iter
+    tic
     decision(:,j) = predict(SVMModel{j},X_test_processed);
+    disp("predicting one pair")
+    toc
 end
 finaldecision = mode(decision,2);
 
