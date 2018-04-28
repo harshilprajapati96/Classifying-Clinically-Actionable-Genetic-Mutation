@@ -16,10 +16,12 @@ print(len(vocab))
 
 def RRNpreprocessing(M,tune,vocablen,special=False):
     u, doc_indices = np.unique(M[:,0],return_inverse=True)
-    xProcessed = csr_matrix((M[:,2], (doc_indices,M[:,1])), shape=(len(doc_indices), vocablen)).toarray()
+    xProcessed = csr_matrix((M[:,2], (doc_indices,M[:,1])), shape=(len(doc_indices), vocablen))
     print(xProcessed)
     alpha = 2*gammaln(tune+1) - gammaln(2*tune+vocablen)
-    WordProb = xProcessed/xProcessed.sum(axis=1)[:,None]
+    print(xProcessed.sum(axis=1))
+    rowsum = xProcessed.sum(axis=1)
+    WordProb = xProcessed.multiply(rowsum.power(-1))
     # print(WordProb)
     # if (special):
     #     for idx, val in enumerate(u):

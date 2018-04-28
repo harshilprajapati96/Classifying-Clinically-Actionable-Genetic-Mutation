@@ -20,31 +20,47 @@ for i_tuning = 1:length(tuning)
     %X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
     toc
     disp("Training time:")
+    classNames = unique(Y_train);
+    numClasses = length(classNames);
+    inds = cell(numClasses,1); % Preallocation
+    SVMModel = cell(numClasses,1);
+    rng(1); % For reproducibility
+for j = 1:numClasses
+    SVMModel{j} = fitcsvm(X_train_processed,(Y_train==classNames(j)),'ClassNames',[false true],...
+        'Standardize',true,'KernelFunction','rbf','KernelScale','auto');
+end
+for j = 1:numClasses
+    SVMModel{j} = fitPosterior(SVMModel{j});
+end
 
 
 % tic
 % t = templateSVM('Standardize',1,'KernelFunction','linear');
 % mdl = fitcecoc(X_train_processed(1:5000,:),Y_train(1:5000),'Learners',t);
 % mean(predict(mdl,X_train_processed(1:5000,:))==Y_train(1:5000))
-% toc
-
-
-    tic
-    [svm_group_ovo, ~] = training_SA_SVM(X_train_processed,Y_train,...
-        alpha,tuning(i_tuning),'ovo',false);
-    toc
+% % toc
+% 
+% 
+%     tic
+%     [svm_group_ovo, ~] = training_SA_SVM(X_train_processed,Y_train,...
+%         alpha,tuning(i_tuning),'ovo',false);
+%     toc
 end
 
-star_tuning = 1; % should be set to the best cv-CCR
+% star_tuning = 1; % should be set to the best cv-CCR
 [X_test_processed,alpha] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
 %X_test_processed = Norm_preprocessing(X_test_woSTOP,length(vocab));
 disp("Decising time:")
-
-prediction = testing_SA_SVM(X_test_processed,svm_group_ovo);
-
-prediction = mode(prediction,2);
-ccr = mean(Y_test==prediction);
+posterior = cell(numClasses,1); 
+for j = 1:numClasses
+    [~,posterior{j}] = predict(SVMModel{j},X_test);
+end
 disp("Training for OVO is done:")
+% prediction = testing_SA_SVM(X_test_processed,svm_group_ovo);
+
+% prediction = mode(prediction,2);
+% ccr = mean(Y_test==prediction);
+% disp("Training for OVO is done:")
 toc
 save('result.mat')
 % 10 parameters

@@ -49,7 +49,6 @@ warning
 options.MaxIter = inf;
 switch mode
     case 'ovo'
-        
         if(k_fold_bool)
             cv_ccr = zeros(tot_m,length(tuning));
             for i = 1:tot_m % interate through all pairs of classes
