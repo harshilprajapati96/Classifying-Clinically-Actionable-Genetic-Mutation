@@ -43,9 +43,9 @@ for t_i = 1:tot_iter
         end
         
     end
-    cv_ccr = mean(svm_ccr,3);
+    cv_ccr = mean(svm_ccr,2);
     %% Selecting Best sigma and Box constant
-    [~,boxcon_star_ind] = max(max(cv_ccr,[],2));
+    [~,boxcon_star_ind] = max(cv_ccr);
     boxcon_star(t_i) = boxcon(boxcon_star_ind);
 end
 %% actual Training with Star sigma and boxconstant
@@ -75,6 +75,7 @@ prediction = mode(prediction,2);
 ccr = mean(prediction==Y_test);
 
 toc
+disp('Linear_kfold')
 display(ccr)
 % PreXtruth = confusionmat(prediction,Y_test);
 % display(PreXtruth);
