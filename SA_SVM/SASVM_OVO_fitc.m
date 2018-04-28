@@ -28,17 +28,19 @@ tot_iter = numClasses*(numClasses-1)/2;
 inds = cell(tot_iter,1); % Preallocation
 SVMModel = cell(tot_iter,1);
 rng(1); % For reproducibility
-for i = 1:m-1
-    for j = i+1:m
+pair_i = [];
+pair_j = [];
+for i = 1:numClasses-1
+    for j = i+1:numClasses
         pair_i = [pair_i ; i];
         pair_j = [pair_j ; j];
     end
 end
 for j = 1:tot_iter % parfor in the end
     [X_train_1_2, Y_train_1_2] ...
-        = ovo(pair_i(j),pair_j(j),X_train,Y_train);
+        = ovo(pair_i(j),pair_j(j),X_train_processed,Y_train);
     SVMModel{j} = fitcsvm(X_train_1_2,Y_train_1_2,...
-        'ClassNames',[false true],'Standardize',true,'KernelFunction','sensing2kernal');
+        'KernelFunction','sensing2kernal');
 end
 
 disp("Total Training time:")
@@ -50,17 +52,16 @@ star_tuning = 1; % should be set to the best cv-CCR
 
 disp("Decising time:")
 n = size(X_test_processed,1);
-posterior = zeros(n,numClasses);
+decision = zeros(n,tot_iter);
 tic
-for j = 1:numClasses
-    [~,post] = predict(SVMModel{j},X_test_processed);
-    posterior(:,j) = post(:,2);
+for j = 1:tot_iter
+    decision(:,j) = predict(SVMModel{j},X_test_processed);
 end
-[confidence,decision] = max(posterior,[],2);
+finaldecision = mode(decision,2);
 
 toc
-disp("Training for OVA is done:")
-OVAccr = mean(decision==Y_test);
+disp("Training for OVO is done:")
+OV0ccr = mean(finaldecision==Y_test);
 
 toc
-save('result.mat')
+save('result_OVO.mat')
