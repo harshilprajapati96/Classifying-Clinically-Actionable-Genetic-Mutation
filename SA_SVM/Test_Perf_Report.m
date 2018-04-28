@@ -52,10 +52,14 @@ end
 %X_test_processed = Norm_preprocessing(X_test_woSTOP,length(vocab));
 disp("Decising time:")
 posterior = cell(numClasses,1); 
+tic
 for j = 1:numClasses
-    [~,posterior{j}] = predict(SVMModel{j},X_test);
+    [~,posterior{j}] = predict(SVMModel{j},X_test_processed);
+    [confidence(j),decision(j)] = max(posterior{j}(:,1));% we care about first one
 end
-disp("Training for OVO is done:")
+toc
+disp("Training for OVA is done:")
+OVAccr = mean(decision==Y_test);
 % prediction = testing_SA_SVM(X_test_processed,svm_group_ovo);
 
 % prediction = mode(prediction,2);
