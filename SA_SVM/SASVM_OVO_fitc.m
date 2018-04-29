@@ -4,6 +4,7 @@
 % OVO
 clear
 close all
+addpath('libsvm-3.22/matlab');
 %% preprocessing
 tic
 Preprocessing_new20;
@@ -22,9 +23,10 @@ Y_test = Y_test(1:find(Y_test<howmanytoys+1,1,'last'));
 tuning = 150; % tuning prarmeter for US new is suggested to be 150 at best
 
 disp("X_train preperation time:")
-global alphaCust
+% global alphaCust
+global SA_n
 tic
-[X_train_processed,alphaCust] = RRN_preprocessing(X_train_woSTOP,tuning,...
+[X_train_processed,SA_n] = SA1_preprocessing(X_train_woSTOP,tuning,...
     length(vocab));
 %X_train_processed = full(Norm_preprocessing(X_train_woSTOP,length(vocab)));
 toc
@@ -46,30 +48,36 @@ for j = 1:tot_iter % parfor in the end
     tic
     [X_train_1_2, Y_train_1_2] ...
         = ovo(pair_i(j),pair_j(j),X_train_processed,Y_train);
-    SVMModel{j} = fitcsvm(X_train_1_2,Y_train_1_2,...
-        'KernelFunction','sensing2kernal');
-    disp("predicting one pair")
+    K =  [ (1:size(X_train_1_2,1))' , sensing1kernal(X_train_1_2,X_train_1_2) ];
+%     SVMModel{j} = fitcsvm(X_train_1_2,Y_train_1_2,...
+%         'KernelFunction','sensing2kernal');
+    SVMModel{j} = svmtrain(Y_train_1_2,K,'-t 4');
+    fprintf("predicting %d pair",j);
     toc
 end
 %% Testing with star_tuning OVO
 star_tuning = 1; % should be set to the best cv-CCR
-[X_test_processed,alphaCust] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
+[X_test_processed,SA_n] = SA1_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
 % X_test_processed = full(Norm_preprocessing(X_test_woSTOP,length(vocab)));
 
 disp("Decising time:")
 n = size(X_test_processed,1);
 decision = zeros(n,tot_iter);
 tic
+     KK =  [ (1:size(X_test_processed,1))' , sensing1kernal(X_test_processed,X_test_processed) ];
+
 for j = 1:tot_iter
     tic
-    decision(:,j) = predict(SVMModel{j},X_test_processed);
-    disp("predicting one pair")
+    decision(:,j) = svmpredict(Y_test,KK,SVMModel{j}, '');
+%     decision(:,j) = predict(SVMModel{j},X_test_processed);
+    fprintf("predicting %d pair",j);
     toc
 end
 finaldecision = mode(decision,2);
 
 toc
-disp("Training for OVO is done:")
+disp("Training for SASVM_OVO is done:")
 OVOccr = mean(finaldecision==Y_test);
 
-save('result_OVO.mat')
+save('SASVM_OVO.mat')
+rmpath('libsvm-3.22/matlab');

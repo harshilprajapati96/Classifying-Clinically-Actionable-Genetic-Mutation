@@ -56,9 +56,9 @@ posterior = zeros(n,numClasses);
 KK =  [ (1:size(X_test_processed,1))' , sensing1kernal(X_test_processed,X_test_processed) ];
 tic
 for j = 1:numClasses
-    [~,~,postt] = svmpredict(double(Y_train==classNames(j)),K,SVMModel{j}, '-t 4 -b 1');
+    [~,~,postt] = svmpredict(double(Y_train==classNames(j)),K,SVMModel{j}, '-b 1');
     posteriort(:,j) = postt(:,SVMModel{j}.Label==1);  
-    [~,~,post] = svmpredict(double(Y_test==classNames(j)),KK,SVMModel{j}, '-t 4 -b 1');
+    [~,~,post] = svmpredict(double(Y_test==classNames(j)),KK,SVMModel{j}, '-b 1');
      posterior(:,j) = post(:,SVMModel{j}.Label==1);    %# probability of class==k
 end
 [confidencet,decisiont] = max(posteriort,[],2);
