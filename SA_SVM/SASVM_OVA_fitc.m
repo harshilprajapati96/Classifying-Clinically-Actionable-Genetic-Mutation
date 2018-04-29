@@ -55,7 +55,7 @@ n = size(X_test_processed,1);
 posterior = zeros(n,numClasses);
 tic
 for j = 1:numClasses
-    [~,post] = predict((Y_test==classNames(j)),K,SVMModel{j});
+    [~,post] = svmpredict((Y_test==classNames(j)),K,SVMModel{j});
     posterior(:,j) = post(:,2);
 end
 [confidence,decision] = max(posterior,[],2);
