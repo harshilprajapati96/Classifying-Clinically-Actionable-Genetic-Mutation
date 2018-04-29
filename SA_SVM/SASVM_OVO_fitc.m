@@ -79,5 +79,5 @@ toc
 disp("Training for SASVM_OVO is done:")
 OVOccr = mean(finaldecision==Y_test);
 
-save('SASVM_OVO.mat')
+save('SASVM_OVO_fitc.mat')
 rmpath('libsvm-3.22/matlab');
