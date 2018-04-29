@@ -20,9 +20,9 @@ Y_test = Y_test(1:find(Y_test<howmanytoys+1,1,'last'));
 %% Training with OVA
 tuning = 150; % tuning prarmeter for US new is suggested to be 150 at best
 disp("X_train preperation time:")
-global alphaCust
+global SA_n
 tic
-[X_train_processed,alphaCust] = RRN_preprocessing(X_train_woSTOP,tuning,...
+[X_train_processed,SA_n] = SA1_preprocessing(X_train_woSTOP,tuning,...
     length(vocab));
 %X_train_processed = full(Norm_preprocessing(X_train_woSTOP,length(vocab)));
 toc
@@ -32,7 +32,7 @@ inds = cell(numClasses,1); % Preallocation
 SVMModel = cell(numClasses,1);
 numTrain = size(X_train_processed,1);
 %% the kernel
-K =  [ (1:numTrain)' , sensing2kernal(X_train_processed,X_train_processed) ];
+K =  [ (1:numTrain)' , sensing1kernal(X_train_processed,X_train_processed) ];
 
 rng(1); % For reproducibility
 for j = 1:numClasses
@@ -40,24 +40,29 @@ for j = 1:numClasses
     tic
 %     SVMModel{j} = fitcsvm(X_train_processed,(Y_train==classNames(j)),...
 %         'ClassNames',[0 1],'Standardize',true,'KernelFunction','sensing2kernal');
-    SVMModel{j} = svmtrain((Y_train==classNames(j)),K,'-t 4 -b 1');
+    SVMModel{j} = svmtrain(double(Y_train==classNames(j)),K,'-t 4 -b 1');
     toc
 end
 
 
 %% Testing with star_tuning OVA
 star_tuning = 1; % should be set to the best cv-CCR
-[X_test_processed,alphaCust] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
+[X_test_processed,SA_n] = SA1_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
 % X_test_processed = full(Norm_preprocessing(X_test_woSTOP,length(vocab)));
 
 disp("Decising time:")
 n = size(X_test_processed,1);
 posterior = zeros(n,numClasses);
+KK =  [ (1:size(X_test_processed,1))' , sensing1kernal(X_test_processed,X_test_processed) ];
 tic
 for j = 1:numClasses
-    [~,~,post] = svmpredict((Y_test==classNames(j)),K,SVMModel{j}, '-b 1');
-     posterior(:,j) = post(:,svms{j}.Label==1);    %# probability of class==k
+    [~,~,postt] = svmpredict(double(Y_train==classNames(j)),K,SVMModel{j}, '-b 1');
+    posteriort(:,j) = postt(:,SVMModel{j}.Label==1);  
+    [~,~,post] = svmpredict(double(Y_test==classNames(j)),KK,SVMModel{j}, '-b 1');
+     posterior(:,j) = post(:,SVMModel{j}.Label==1);    %# probability of class==k
 end
+[confidencet,decisiont] = max(posteriort,[],2);
+
 [confidence,decision] = max(posterior,[],2);
 
 toc
