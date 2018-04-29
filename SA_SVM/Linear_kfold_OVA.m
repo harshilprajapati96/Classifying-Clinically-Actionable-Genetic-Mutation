@@ -8,6 +8,9 @@ Preprocessing_new20;
 X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
 disp("Preprocessing is done:")
 toc
+
+addpath('libsvm-3.22/matlab');
+rmpath('libsvm-3.22/matlab');
 %% Finding Best sigma and Box constant
 classNames = unique(Y_train);
 numClasses = length(classNames);
@@ -44,13 +47,13 @@ tic
 addpath('libsvm-3.22/matlab');
 warning('off','all')
 warning
-svms = cell(tot_iter,1);
-parfor j = 1:tot_iter
+svms = cell(numClasses,1);
+parfor j = 1:numClasses
     [X_train_1_2, Y_train_1_2] ...
         = ova(j,X_train_processed,Y_train);
 %     svms{j} = svmtrain(X_train_1_2,Y_train_1_2,'boxconstraint',boxcon_star(j),...
 %         'autoscale','false','kernel_function','Linear','kernelcachelimit',inf);
-        svms{j} = svmtrain(Y_train_1_2,X_train_1_2,sprintf('-c %f -t 0 -b 1 -m inf',boxcon_star(j)));
+    svms{j} = svmtrain(Y_train_1_2,X_train_1_2,sprintf('-c %f -t 0 -b 1 -m inf',boxcon_star(j)));
 end
 train_time = toc;
 [~,~,docIDreorder_test] = unique(X_test(:,1));
