@@ -76,4 +76,5 @@ display(ccr)
 % PreXtruth = confusionmat(prediction,Y_test);
 % display(PreXtruth);
 save('Linear_kfold_OVA.mat')
+rmpath('libsvm-3.22/matlab');
 
