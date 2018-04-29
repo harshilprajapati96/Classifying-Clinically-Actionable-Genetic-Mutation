@@ -33,7 +33,7 @@ SVMModel = cell(numClasses,1);
 numTrain = size(X_train_processed,1);
 %% the kernel
 K =  [ (1:numTrain)' , sensing1kernal(X_train_processed,X_train_processed) ];
-
+tic
 rng(1); % For reproducibility
 for j = 1:numClasses
     fprintf("Training class %d",j);
@@ -43,7 +43,7 @@ for j = 1:numClasses
     SVMModel{j} = svmtrain(double(Y_train==classNames(j)),K,'-t 4 -b 1');
     toc
 end
-
+traintime = toc;
 
 %% Testing with star_tuning OVA
 star_tuning = 1; % should be set to the best cv-CCR
@@ -56,19 +56,19 @@ posterior = zeros(n,numClasses);
 KK =  [ (1:size(X_test_processed,1))' , sensing1kernal(X_test_processed,X_test_processed) ];
 tic
 for j = 1:numClasses
-    [~,~,postt] = svmpredict(double(Y_train==classNames(j)),K,SVMModel{j}, '-b 1');
+    [~,~,postt] = svmpredict(double(Y_train==classNames(j)),K,SVMModel{j}, '-t 4 -b 1');
     posteriort(:,j) = postt(:,SVMModel{j}.Label==1);  
-    [~,~,post] = svmpredict(double(Y_test==classNames(j)),KK,SVMModel{j}, '-b 1');
+    [~,~,post] = svmpredict(double(Y_test==classNames(j)),KK,SVMModel{j}, '-t 4 -b 1');
      posterior(:,j) = post(:,SVMModel{j}.Label==1);    %# probability of class==k
 end
 [confidencet,decisiont] = max(posteriort,[],2);
 
 [confidence,decision] = max(posterior,[],2);
 
-toc
+testtime = toc;
 disp("Training for OVA is done:")
 OVAccr = mean(decision==Y_test);
 disp(OVAccr)
-toc
+
 save('SASVM_OVA.mat')
 rmpath('libsvm-3.22/matlab');
