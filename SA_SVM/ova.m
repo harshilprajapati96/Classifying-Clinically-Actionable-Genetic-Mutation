@@ -13,7 +13,7 @@
 function [X_train,Y_train]...
     = ova(class,X_train,Y_train)
 % for Training documents
-Y_train(Y_train~=class)=0;
+Y_train(Y_train~=class)=-1;
 Y_train(Y_train==class)=1;
 % make sure there is no zero element in the matrix
 % if (nnz(X_train)/numel(X_train) ~= 1)

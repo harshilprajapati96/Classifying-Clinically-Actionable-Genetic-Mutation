@@ -41,31 +41,33 @@ for t_i = 1:numClasses
 end
 %% actual Training with Star sigma and boxconstant
 tic
-
+addpath('libsvm-3.22/matlab');
 warning('off','all')
 warning
 svms = cell(tot_iter,1);
 parfor j = 1:tot_iter
     [X_train_1_2, Y_train_1_2] ...
-        = ovo(pair_i(j),pair_j(j),X_train_processed,Y_train);
-    svms{j} = svmtrain(X_train_1_2,Y_train_1_2,'boxconstraint',boxcon_star(j),...
-        'autoscale','false','kernel_function','Linear');
-    
+        = ova(j,X_train_processed,Y_train);
+%     svms{j} = svmtrain(X_train_1_2,Y_train_1_2,'boxconstraint',boxcon_star(j),...
+%         'autoscale','false','kernel_function','Linear','kernelcachelimit',inf);
+        svms{j} = svmtrain(Y_train_1_2,X_train_1_2,sprintf('-c %f -t 0 -b 1 -m inf',boxcon_star(j)));
 end
-
+train_time = toc;
 [~,~,docIDreorder_test] = unique(X_test(:,1));
 X_test = sparse(docIDreorder_test,X_test(:,2),...
     X_test(:,3),length(Y_test),length(vocab));
-
-prediction = zeros(length(Y_test),length(svms));
+tic
+prediction_prob = zeros(length(Y_test),length(svms));
 parfor i = 1:length(svms)
-    prediction(:,i) = svmclassify(svms{i},X_test);
+%     prediction(:,i) = svmclassify(svms{i},X_test);
+[~,~,p] = svmpredict(Y_test, X_test, svms{i}, '-b 1');
+    prediction_prob(:,i) = p(:,svms{i}.Label==1);    %# probability of class==k
 end
 
-prediction = mode(prediction,2);
+[~,prediction] = max(prediction_prob,[],2);
 ccr = mean(prediction==Y_test);
 
-toc
+test_time = toc;
 disp('Linear_kfold_OVA')
 display(ccr)
 % PreXtruth = confusionmat(prediction,Y_test);

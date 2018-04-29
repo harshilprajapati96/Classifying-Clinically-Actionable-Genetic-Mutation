@@ -2,7 +2,7 @@
 % MATLAB R2017b
 % Bowen Song U04079758
 % OVA
-addpath('../libsvm-3.12/matlab');
+addpath('libsvm-3.22/matlab');
 %% preprocessing
 tic
 Preprocessing_new20;
