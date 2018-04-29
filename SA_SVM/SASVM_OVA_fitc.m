@@ -40,7 +40,7 @@ for j = 1:numClasses
     tic
 %     SVMModel{j} = fitcsvm(X_train_processed,(Y_train==classNames(j)),...
 %         'ClassNames',[0 1],'Standardize',true,'KernelFunction','sensing2kernal');
-    SVMModel{j} = svmtrain((Y_train==classNames(j)),K,'-t 4');
+    SVMModel{j} = svmtrain((Y_train==classNames(j)),K,'-t 4 -b 1');
     toc
 end
 
