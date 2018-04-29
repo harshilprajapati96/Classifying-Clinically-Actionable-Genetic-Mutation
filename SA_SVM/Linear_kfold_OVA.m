@@ -29,11 +29,10 @@ for t_i = 1:numClasses
         parfor i = 1:5
             svms = svmtrain(X_train_1_2(training(kfold,i),:),Y_train_1_2(training(kfold,i),:),...
                 'boxconstraint',boxcon(j)*ones(kfold.TrainSize(i),1),...
-                'autoscale','false','kernel_function','linear');
+                'autoscale','false','kernel_function','linear','kernelcachelimit',inf);
             svm_ccr(j,i) = mean(svmclassify(svms,X_train_1_2(test(kfold,i),:))...
                 ==Y_train_1_2(test(kfold,i),:));
         end
-        
     end
     cv_ccr = mean(svm_ccr,2);
     %% Selecting Best sigma and Box constant

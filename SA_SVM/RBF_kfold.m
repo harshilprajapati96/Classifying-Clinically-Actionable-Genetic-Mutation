@@ -85,4 +85,4 @@ toc
 display(ccr)
 PreXtruth = confusionmat(prediction,Y_test);
 display(PreXtruth);
-
+save('RBF_kfold.mat')
