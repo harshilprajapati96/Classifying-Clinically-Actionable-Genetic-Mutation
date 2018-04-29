@@ -26,7 +26,7 @@ docXvocab = sparse(Doc_Index,X_train(:,2),X_train(:,3),...
 % according to the specified probabilities.
 WordProb = full(docXvocab./sum(docXvocab,2));
 X_train_processed = zeros(size(docXvocab,1),N);
-parfor i = 1:size(docXvocab,1)
+for i = 1:size(docXvocab,1)
 X_train_processed(i,:) = full(randsample(docXvocab(i,:),N,true,WordProb(i,:))); 
 end
 alpha = 2*gammaln(N+1) - gammaln(2*N+vocab_len);

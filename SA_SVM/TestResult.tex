@@ -1,0 +1,107 @@
+\documentclass[a4paper, 11pt]{article}
+%% Math Support
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumitem}
+%independent sign
+\usepackage{rotating}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+%% antifloat image
+\usepackage{float}
+%[Ht] for fix 
+%[htbp] for float
+
+%% Graphics Support
+\usepackage{listings}%begin MATLAB 
+\usepackage{color}
+\usepackage{placeins}
+\setcounter{MaxMatrixCols}{21}
+\footnotesize
+\setlength{\arraycolsep}{2.5pt}
+\medmuskip = 1mu
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+language=MATLAB,
+aboveskip=3mm,
+belowskip=3mm,
+showstringspaces=false,
+columns=flexible,
+basicstyle={\small\ttfamily},
+numbers=none,
+numberstyle=\tiny\color{gray},
+keywordstyle=\color{blue},
+commentstyle=\color{dkgreen},
+stringstyle=\color{mauve},
+breaklines=true,
+breakatwhitespace=true,
+tabsize=3
+}%end MATLAB 
+% lstinputlisting
+
+% \begin{figure}[ht]
+%   \centering
+%   \includegraphics[width=\linewidth]{sincom.png}
+%   \caption{Comparing Polynomial and Taylor Approximation with Sine function}
+%    \label{figure:sincom}
+%   \end{figure}
+% \FloatBarrier
+
+\setlength\parindent{0pt}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{graphicx}  % png/jpg support
+\usepackage{fullpage} % changes the margin
+\setcounter{section}{8}
+\setcounter{subsection}{0}
+
+% Show how you reached that conclusion
+% Box the final result
+% Label all axes, Group related plots together
+% Discuss and explain what is going on in the plots
+% Print single paged
+% Start each problem on a new page
+
+\begin{document}
+
+\section{Linear Kernel}
+$ccr = 0.7213$
+\[\begin{bmatrix}
+221  &   3  &   4  &   0  &   2  &   0  &   0  &   8  &   1  &   6  &   3  &   0  &   2  &  20  &   4  &  18  &   3  &  23  &   6    & 43 \\
+     2  & 281  &  34  &  24  &  10  &  66  &   4  &   2  &   3  &   3  &   0  &  12  &  22  &  13  &  13  &   7  &   6  &   4  &   0    &  5 \\
+     0  &  12  & 252  &  29  &   7  &  28  &   4  &   1  &   0  &   0  &   0  &   3  &   4  &   0  &   1  &   3  &   1  &   0  &   0    &  0 \\
+     0  &  10  &  39  & 268  &  21  &  13  &  17  &   3  &   0  &   0  &   1  &   3  &  25  &   3  &   0  &   0  &   2  &   1  &   0    &  2 \\
+     0  &  16  &  10  &  20  & 281  &   9  &  10  &   4  &   3  &   1  &   2  &   7  &  16  &   6  &   4  &   0  &   3  &   0  &   2    &  1 \\
+     3  &  22  &  12  &   2  &   4  & 240  &   2  &   2  &   2  &   0  &   1  &   5  &   9  &   3  &   7  &   2  &   4  &   2  &   2    &  0 \\
+     5  &   8  &   9  &  14  &  18  &   9  & 315  &  17  &   6  &   9  &   7  &  10  &  11  &  22  &   6  &  12  &   2  &   5  &  10    &  4 \\
+     2  &   3  &   0  &   6  &   5  &   3  &   7  & 319  &  25  &   3  &   3  &   3  &  12  &  16  &   3  &   1  &   6  &  10  &   5    &  3 \\
+     1  &   2  &   3  &   1  &   0  &   0  &   0  &   7  & 335  &   3  &   2  &   2  &   7  &   2  &   3  &   0  &   1  &   1  &   4    &  0 \\
+     3  &   5  &   1  &   1  &   3  &   1  &   7  &   5  &   4  & 328  &  27  &   7  &   2  &   6  &   3  &   1  &   3  &   5  &   5    &  4 \\
+     0  &   0  &   1  &   1  &   0  &   0  &   0  &   0  &   1  &  20  & 339  &   0  &   1  &   0  &   1  &   0  &   2  &   0  &   0    &  1 \\
+     3  &   6  &   9  &   1  &   2  &   6  &   0  &   1  &   1  &   2  &   2  & 316  &  21  &   1  &   3  &   0  &   5  &   3  &   6    &  0 \\
+     3  &  14  &   5  &  23  &  24  &   7  &   7  &  14  &   7  &   4  &   2  &   5  & 231  &  17  &  11  &   6  &   7  &   7  &   2    &  2 \\
+     6  &   1  &   4  &   1  &   1  &   3  &   0  &   1  &   2  &   1  &   0  &   1  &  11  & 263  &  10  &   6  &   7  &   5  &  12    &  3 \\
+     7  &   2  &   2  &   0  &   2  &   1  &   0  &   2  &   2  &   1  &   1  &   0  &   4  &   0  & 306  &   2  &   1  &   6  &   5    &  4 \\
+    24  &   1  &   0  &   0  &   0  &   1  &   6  &   1  &   0  &   1  &   1  &   2  &   5  &   7  &   3  & 318  &   6  &   4  &   1    & 40 \\
+     4  &   1  &   1  &   1  &   2  &   2  &   1  &   2  &   3  &   2  &   6  &   7  &   0  &   3  &   6  &   0  & 275  &  13  &  86    & 12 \\
+     1  &   0  &   0  &   0  &   0  &   0  &   0  &   1  &   0  &   1  &   0  &   0  &   1  &   1  &   0  &   1  &   2  & 260  &   0    &  1 \\
+     0  &   0  &   2  &   0  &   0  &   1  &   0  &   3  &   2  &   5  &   0  &   7  &   1  &   5  &   5  &   1  &  10  &  20  & 144    &  5 \\
+    33  &   2  &   3  &   0  &   1  &   0  &   2  &   2  &   0  &   7  &   2  &   5  &   8  &   5  &   3  &  20  &  18  &   7  &  19  &  121 \\
+\end{bmatrix}\]
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

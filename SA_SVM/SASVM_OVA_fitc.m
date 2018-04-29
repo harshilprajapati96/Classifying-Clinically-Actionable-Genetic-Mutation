@@ -2,7 +2,7 @@
 % MATLAB R2017b
 % Bowen Song U04079758
 % OVA
-
+addpath('../libsvm-3.12/matlab');
 %% preprocessing
 tic
 Preprocessing_new20;
@@ -33,17 +33,18 @@ SVMModel = cell(numClasses,1);
 rng(1); % For reproducibility
 for j = 1:numClasses
     fprintf("Training class %d",j);
+    K =  [ X_train_processed , rbfKernel(trainData,trainData) ];
     tic
     SVMModel{j} = fitcsvm(X_train_processed,(Y_train==classNames(j)),...
         'ClassNames',[0 1],'Standardize',true,'KernelFunction','sensing2kernal');
     toc
 end
-for j = 1:numClasses
-    fprintf("Getting Posterior for class %d",j);
-    tic
-    SVMModel{j} = fitPosterior(SVMModel{j});
-    toc
-end
+% for j = 1:numClasses
+%     fprintf("Getting Posterior for class %d",j);
+%     tic
+%     SVMModel{j} = fitPosterior(SVMModel{j});
+%     toc
+% end
 
 %% Testing with star_tuning OVA
 star_tuning = 1; % should be set to the best cv-CCR

@@ -79,4 +79,5 @@ disp('Linear_kfold')
 display(ccr)
 % PreXtruth = confusionmat(prediction,Y_test);
 % display(PreXtruth);
+save('Linear_kfold.mat')
 
