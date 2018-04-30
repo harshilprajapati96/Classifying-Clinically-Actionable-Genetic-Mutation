@@ -10,7 +10,6 @@ disp("Preprocessing is done:")
 toc
 
 addpath('libsvm-3.22/matlab');
-rmpath('libsvm-3.22/matlab');
 %% Finding Best sigma and Box constant
 classNames = unique(Y_train);
 numClasses = length(classNames);
@@ -29,12 +28,16 @@ for t_i = 1:numClasses
         = ova(t_i,X_train_processed,Y_train);
     for j = 1:length(boxcon)
         kfold = cvpartition(length(Y_train_1_2),'KFold',5);
-        parfor i = 1:5
-            svms = svmtrain(X_train_1_2(training(kfold,i),:),Y_train_1_2(training(kfold,i),:),...
-                'boxconstraint',boxcon(j)*ones(kfold.TrainSize(i),1),...
-                'autoscale','false','kernel_function','linear','kernelcachelimit',inf);
-            svm_ccr(j,i) = mean(svmclassify(svms,X_train_1_2(test(kfold,i),:))...
-                ==Y_train_1_2(test(kfold,i),:));
+        for i = 1:5 %par
+%             svms = svmtrain(X_train_1_2(training(kfold,i),:),Y_train_1_2(training(kfold,i),:),...
+%                 'boxconstraint',boxcon(j)*ones(kfold.TrainSize(i),1),...
+%                 'autoscale','false','kernel_function','linear','kernelcachelimit',inf);
+            svms = svmtrain(Y_train_1_2(training(kfold,i),:),X_train_1_2(training(kfold,i),:),...
+                sprintf('-c %f -t 0 -m inf',boxcon(j)));
+            svm_ccr(j,i) = mean(Y_train_1_2(test(kfold,i),:)==...
+                svmpredict(Y_train_1_2(test(kfold,i),:),X_train_1_2(test(kfold,i),:),svms,''));
+%             svm_ccr(j,i) = mean(svmclassify(svms,X_train_1_2(test(kfold,i),:))...
+%                 ==Y_train_1_2(test(kfold,i),:));
         end
     end
     cv_ccr = mean(svm_ccr,2);
@@ -44,7 +47,6 @@ for t_i = 1:numClasses
 end
 %% actual Training with Star sigma and boxconstant
 tic
-addpath('libsvm-3.22/matlab');
 warning('off','all')
 warning
 svms = cell(numClasses,1);

@@ -44,6 +44,8 @@ for i = 1:numClasses-1
         pair_j = [pair_j ; j];
     end
 end
+disp("Training time:")
+tic
 for j = 1:tot_iter % parfor in the end
     tic
     [X_train_1_2, Y_train_1_2] ...
@@ -55,27 +57,29 @@ for j = 1:tot_iter % parfor in the end
     fprintf("predicting %d pair",j);
     toc
 end
+trainTime = toc;
 %% Testing with star_tuning OVO
 star_tuning = 1; % should be set to the best cv-CCR
 [X_test_processed,SA_n] = SA1_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
 % X_test_processed = full(Norm_preprocessing(X_test_woSTOP,length(vocab)));
 
-disp("Decising time:")
+disp("Testing time:")
 n = size(X_test_processed,1);
 decision = zeros(n,tot_iter);
 tic
      KK =  [ (1:size(X_test_processed,1))' , sensing1kernal(X_test_processed,X_test_processed) ];
 
 for j = 1:tot_iter
-    tic
+
     decision(:,j) = svmpredict(Y_test,KK,SVMModel{j}, '');
 %     decision(:,j) = predict(SVMModel{j},X_test_processed);
     fprintf("predicting %d pair",j);
-    toc
+
 end
 finaldecision = mode(decision,2);
 
-toc
+testTime = toc;
+
 disp("Training for SASVM_OVO is done:")
 OVOccr = mean(finaldecision==Y_test);
 

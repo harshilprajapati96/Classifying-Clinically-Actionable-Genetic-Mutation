@@ -2,6 +2,7 @@
 % MATLAB R2017b
 % Bowen Song U04079758
 % OVA
+%% change to sparse matrix and parfor
 addpath('libsvm-3.22/matlab');
 %% preprocessing
 tic
@@ -9,11 +10,11 @@ Preprocessing_new20;
 disp("Preprocessing is done:")
 toc
 %% toy size
-% howmanytoys = 2;
-% X_train_woSTOP = X_train_woSTOP(1:find(Y_train_expand<howmanytoys+1,1,'last'),:);
-% X_test_woSTOP = X_test_woSTOP(1:find(Y_test_expand<howmanytoys+1,1,'last'),:);
-% Y_train = Y_train(1:find(Y_train<howmanytoys+1,1,'last'));
-% Y_test = Y_test(1:find(Y_test<howmanytoys+1,1,'last'));
+howmanytoys = 2;
+X_train_woSTOP = X_train_woSTOP(1:find(Y_train_expand<howmanytoys+1,1,'last'),:);
+X_test_woSTOP = X_test_woSTOP(1:find(Y_test_expand<howmanytoys+1,1,'last'),:);
+Y_train = Y_train(1:find(Y_train<howmanytoys+1,1,'last'));
+Y_test = Y_test(1:find(Y_test<howmanytoys+1,1,'last'));
 %% use data with filtered stoped words
 % preprocess Further with stop wrods technique
 
@@ -31,9 +32,11 @@ numClasses = length(classNames);
 inds = cell(numClasses,1); % Preallocation
 SVMModel = cell(numClasses,1);
 numTrain = size(X_train_processed,1);
+
 %% the kernel
-K =  [ (1:numTrain)' , sensing1kernal(X_train_processed,X_train_processed) ];
+disp("Training time:")
 tic
+K =  [ (1:numTrain)' , sensing1kernal(X_train_processed,X_train_processed) ];
 rng(1); % For reproducibility
 for j = 1:numClasses
     fprintf("Training class %d",j);
@@ -43,18 +46,18 @@ for j = 1:numClasses
     SVMModel{j} = svmtrain(double(Y_train==classNames(j)),K,'-t 4 -b 1');
     toc
 end
-traintime = toc;
+trainTime = toc;
 
 %% Testing with star_tuning OVA
 star_tuning = 1; % should be set to the best cv-CCR
 [X_test_processed,SA_n] = SA1_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
 % X_test_processed = full(Norm_preprocessing(X_test_woSTOP,length(vocab)));
 
-disp("Decising time:")
+disp("Testing time:")
+tic
 n = size(X_test_processed,1);
 posterior = zeros(n,numClasses);
 KK =  [ (1:size(X_test_processed,1))' , sensing1kernal(X_test_processed,X_test_processed) ];
-tic
 for j = 1:numClasses
     [~,~,postt] = svmpredict(double(Y_train==classNames(j)),K,SVMModel{j}, '-b 1');
     posteriort(:,j) = postt(:,SVMModel{j}.Label==1);  
@@ -65,7 +68,7 @@ end
 
 [confidence,decision] = max(posterior,[],2);
 
-testtime = toc;
+testTime = toc;
 disp("Testing for SASVM_OVA_fitc kernal 1 is done:")
 OVAccr = mean(decision==Y_test);
 disp(OVAccr)
