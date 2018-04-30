@@ -97,8 +97,6 @@ end
 traintime = toc;
 
 X_test = Norm_preprocessing(X_test_woSTOP,length(vocab));
-[~,~,docIDreorder_test] = unique(X_test(:,1));
-X_test = sparse(docIDreorder_test,X_test(:,2),X_test(:,3),size(X_test,1),length(vocab));
 disp("predicting")
 tic
 prediction_prob = zeros(length(Y_test),length(svms));
