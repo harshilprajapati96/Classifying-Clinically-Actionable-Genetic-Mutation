@@ -6,15 +6,22 @@
 addpath('libsvm-3.22/matlab');
 tic
 Preprocessing_new20;
-X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
-disp("Preprocessing is done:")
-toc
+
 %% toy size
 howmanytoys = 2;
 X_train_woSTOP = X_train_woSTOP(1:find(Y_train_expand<howmanytoys+1,1,'last'),:);
 X_test_woSTOP = X_test_woSTOP(1:find(Y_test_expand<howmanytoys+1,1,'last'),:);
 Y_train = Y_train(1:find(Y_train<howmanytoys+1,1,'last'));
 Y_test = Y_test(1:find(Y_test<howmanytoys+1,1,'last'));
+
+
+
+
+
+X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
+disp("Preprocessing is done:")
+toc
+
 %% Finding Best sigma and Box constant
 classNames = unique(Y_train);
 numClasses = length(classNames);
@@ -68,8 +75,8 @@ boxcon_star(t_i) = boxcon(boxcon_star_ind);
 rbf_sig_star(t_i) = rbf_sig(rbf_sig_star_ind);
 end
 %% actual Training with Star sigma and boxconstant
-
-
+disp("start training")
+tic
 svms = cell(tot_iter,1);
 parfor j = 1:tot_iter
 [X_train_1_2, Y_train_1_2] ...
@@ -87,10 +94,12 @@ parfor j = 1:tot_iter
      
 end
 
+traintime = toc;
 [~,~,docIDreorder_test] = unique(X_test(:,1));
 X_test = sparse(docIDreorder_test,X_test(:,2),...
     X_test(:,3),length(Y_test),length(vocab));
-
+disp("predicting")
+tic
 prediction_prob = zeros(length(Y_test),length(svms));
 parfor i = 1:length(svms)
 % prediction(:,i) = svmclassify(svms{i},X_test);
@@ -98,6 +107,7 @@ parfor i = 1:length(svms)
 [~,~,p] = svmpredict(Y_test, X_test, svms{i}, '-b 1');
     prediction_prob(:,i) = p(:,svms{i}.Label==1);    %# probability of class==k
 end
+testtime=toc;
 
 
 [~,prediction] = max(prediction_prob,[],2);
