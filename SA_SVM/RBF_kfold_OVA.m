@@ -90,7 +90,7 @@ parfor j = 1:tot_iter
              K =  [ (1:size(X_train_1_2,1))' ,...
                  rbfKernel(X_train_1_2,X_train_1_2) ];
              
-             svms{j} = svmtrain(double(Y_train_1_2), K, sprintf('-t 4 -c %f -m inf',boxcon_star(j)));
+             svms{j} = svmtrain(double(Y_train_1_2), K, sprintf('-t 4 -b 1 -c %f -m inf',boxcon_star(j)));
      
 end
 
