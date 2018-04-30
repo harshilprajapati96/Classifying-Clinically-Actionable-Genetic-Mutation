@@ -90,14 +90,15 @@ parfor j = 1:tot_iter
              K =  [ (1:size(X_train_1_2,1))' ,...
                  rbfKernel(X_train_1_2,X_train_1_2) ];
              
-             svms(j) = svmtrain(double(Y_train_1_2), K, sprintf('-t 4 -c %f -m inf',boxcon_star(j)));
+             svms{j} = svmtrain(double(Y_train_1_2), K, sprintf('-t 4 -c %f -m inf',boxcon_star(j)));
      
 end
 
 traintime = toc;
+
+X_test = Norm_preprocessing(X_test_woSTOP,length(vocab));
 [~,~,docIDreorder_test] = unique(X_test(:,1));
-X_test = sparse(docIDreorder_test,X_test(:,2),...
-    X_test(:,3),length(Y_test),length(vocab));
+X_test = sparse(docIDreorder_test,X_test(:,2),X_test(:,3),size(X_test,1),length(vocab));
 disp("predicting")
 tic
 prediction_prob = zeros(length(Y_test),length(svms));
