@@ -10,11 +10,11 @@ Preprocessing_new20;
 disp("Preprocessing is done:")
 toc
 % toy size
-howmanytoys = 2;
-X_train_woSTOP = X_train_woSTOP(1:find(Y_train_expand<howmanytoys+1,1,'last'),:);
-X_test_woSTOP = X_test_woSTOP(1:find(Y_test_expand<howmanytoys+1,1,'last'),:);
-Y_train = Y_train(1:find(Y_train<howmanytoys+1,1,'last'));
-Y_test = Y_test(1:find(Y_test<howmanytoys+1,1,'last'));
+% howmanytoys = 2;
+% X_train_woSTOP = X_train_woSTOP(1:find(Y_train_expand<howmanytoys+1,1,'last'),:);
+% X_test_woSTOP = X_test_woSTOP(1:find(Y_test_expand<howmanytoys+1,1,'last'),:);
+% Y_train = Y_train(1:find(Y_train<howmanytoys+1,1,'last'));
+% Y_test = Y_test(1:find(Y_test<howmanytoys+1,1,'last'));
 %% use data with filtered stoped words
 % preprocess Further with stop wrods technique
 
