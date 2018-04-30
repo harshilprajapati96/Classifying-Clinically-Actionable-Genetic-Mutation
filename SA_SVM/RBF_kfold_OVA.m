@@ -33,6 +33,7 @@ warning
 for t_i = 1:tot_iter
         [X_train_1_2, Y_train_1_2] ...
             = ova(j,X_train_processed,Y_train);
+        tic
 for k = 1:length(rbf_sig)
     for j = 1:length(boxcon)
     kfold = cvpartition(length(Y_train_1_2),'KFold',5);
@@ -41,24 +42,28 @@ for k = 1:length(rbf_sig)
 %                  'boxconstraint',boxcon(j)*ones(kfold.TrainSize(i),1),...
 %                  'autoscale','false','kernel_function','rbf'...
 %                  ,'rbf_sigma',rbf_sig(k));
+
             rbfKernel = @(X,Y) exp(-rbf_sig(k) .* pdist2(X,Y,'euclidean').^2);
-            
+
              K =  [ (1:size(X_train_1_2(training(kfold,i),:),1))' ,...
                  rbfKernel(X_train_1_2(training(kfold,i),:),X_train_1_2(training(kfold,i),:)) ];
              
-             model = svmtrain(double(Y_train_1_2(training(kfold,i),:)), K, sprintf('-t 4 -c %f -m inf',boxcon(j)));
-             
+             model = svmtrain(double(Y_train_1_2(training(kfold,i),:)), K, sprintf('-t 4 -c %f -m inf -q',boxcon(j)));
+
              svm_ccr(j,k,i) = mean(Y_train_1_2(test(kfold,i),:)==...
-                svmpredict(Y_train_1_2(test(kfold,i),:),X_train_1_2(test(kfold,i),:),model,''));
+                svmpredict(Y_train_1_2(test(kfold,i),:),X_train_1_2(test(kfold,i),:),model,'-q'));
 %             svm_ccr(j,k,i) = mean(svmclassify(svms,X_train_1_2(test(kfold,i),:))...
 %                 ==Y_train_1_2(test(kfold,i),:));
         end
     end
 end
+fprintf('class %d out of %d is done',t_i,tot_iter);
+toc
+
 cv_ccr = mean(svm_ccr,3);
 %% Selecting Best sigma and Box constant
-[~,boxcon_star_ind] = max(max(cv_ccr,[],2));
-[~,rbf_sig_star_ind] = max(max(cv_ccr));
+[boxcon_star_perf(t_i),boxcon_star_ind] = max(max(cv_ccr,[],2));
+[rbf_sig_star_perf(t_i),rbf_sig_star_ind] = max(max(cv_ccr));
 boxcon_star(t_i) = boxcon(boxcon_star_ind);
 rbf_sig_star(t_i) = rbf_sig(rbf_sig_star_ind);
 end
