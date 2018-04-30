@@ -70,7 +70,7 @@ end
 %% actual Training with Star sigma and boxconstant
 
 
-svms = cell(tot_iter,1);d
+svms = cell(tot_iter,1);
 parfor j = 1:tot_iter
 [X_train_1_2, Y_train_1_2] ...
         = ova(j,X_train_processed,Y_train);
