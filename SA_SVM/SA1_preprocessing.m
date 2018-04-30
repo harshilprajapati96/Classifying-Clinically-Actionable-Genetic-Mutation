@@ -24,7 +24,7 @@ docXvocab = sparse(Doc_Index,X_train(:,2),X_train(:,3),...
     Doc_Index(length(Doc_Index)),vocab_len);
 % Choosing N words randomly and with replacement from the sequence ACGT, 
 % according to the specified probabilities.
-X_train_processed = docXvocab./sum(docXvocab,2);
+X_train_processed = full(docXvocab./sum(docXvocab,2));
 
 n = N;
 end

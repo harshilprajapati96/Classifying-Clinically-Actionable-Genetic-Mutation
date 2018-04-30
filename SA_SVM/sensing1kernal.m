@@ -12,13 +12,14 @@ global SA_n
 
 theones = ones(1,m);
 for i = 1:size(x_hat_i,1)
+    tic
     parfor j = size(x_hat_j,1)
         
         
-        K1(i,j) = sum(gammaln(SA_n.*x_hat_i(i,:)+SA_n.*x_hat_j(j,:)+theones)...
-            -gammaln(SA_n.*x_hat_i(i,:)+theones)-gammaln(SA_n.*x_hat_j(j,:)+theones),2);
+        K1(i,j) = sum(gammaln(SA_n.*(x_hat_i(i,:)+x_hat_j(j,:))+theones)-gammaln(SA_n.*x_hat_i(i,:)+theones)-gammaln(SA_n.*x_hat_j(j,:)+theones),2);
         
     end
+    toc
 end
 
 % for i = 1:size(x_hat_i,1)
@@ -31,8 +32,7 @@ end
 %     temp = sum(a-b-c,2);
 %     toc
 %     tic
-% K1(i,:) = sum(gammaln(repmat(SA_n.*x_hat_i(i,:),size(x_hat_i,1),1)+SA_n.*x_hat_j+theones)...
-%     -gammaln(SA_n.*x_hat_i(i,:)+theones)-gammaln(SA_n.*x_hat_j+theones),2);
+%K1(i,:) = sum(gammaln(SA_n.*x_hat_i(i,:)+SA_n.*x_hat_j+1)-gammaln(SA_n.*x_hat_i(i,:)+1)-gammaln(SA_n.*x_hat_j+1),2);
 % toc
 % end
 
