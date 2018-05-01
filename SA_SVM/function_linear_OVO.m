@@ -46,11 +46,11 @@ for t_i = 1:tot_iter
     end
     cv_ccr = mean(svm_ccr,2);
     %% Selecting Best sigma and Box constant
-    [~,boxcon_star_ind] = max(cv_ccr);
+    [boxcon_star_perf(t_i),boxcon_star_ind] = max(cv_ccr);
     boxcon_star(t_i) = boxcon(boxcon_star_ind);
 end
 %% actual Training with Star sigma and boxconstant
-tic
+traintic = tic;
 
 warning('off','all')
 warning
@@ -63,11 +63,11 @@ parfor j = 1:tot_iter
      svms{j} = svmtrain(Y_train_1_2,X_train_1_2,sprintf('-c %f -t 0 -m inf -h 0',boxcon_star(j)));
 
 end
-
+traintime = toc(traintic);
 [~,~,docIDreorder_test] = unique(X_test(:,1));
 X_test = sparse(docIDreorder_test,X_test(:,2),...
     X_test(:,3),length(Y_test),length(vocab));
-
+testtic = tic;
 prediction_prob = zeros(length(Y_test),length(svms));
 parfor i = 1:length(svms)
 %     prediction(:,i) = svmclassify(svms{i},X_test);
@@ -78,9 +78,12 @@ end
 prediction = mode(prediction_prob,2);
 ccr = mean(prediction==Y_test);
 
-toc
+testtime = toc(testtic);
 disp('Linear_kfold')
 display(ccr)
+display(traintime)
+display(testtime)
+% display(boxcon_star_perf)
 % PreXtruth = confusionmat(prediction,Y_test);
 % display(PreXtruth);
 save('Linear_kfold.mat')
