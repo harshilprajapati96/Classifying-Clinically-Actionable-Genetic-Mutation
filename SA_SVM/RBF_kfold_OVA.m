@@ -39,7 +39,7 @@ warning('off','all')
 warning
 for t_i = 1:tot_iter
         [X_train_1_2, Y_train_1_2] ...
-            = ova(j,X_train_processed,Y_train);
+            = ova(t_i,X_train_processed,Y_train);
         tic
 for k = 1:length(rbf_sig)
     for j = 1:length(boxcon)

@@ -74,7 +74,7 @@ ccr = mean(prediction==Y_test);
 testtime = toc;
 fprintf('%s',filename)
 display(ccr)
-% PreXtruth = confusionmat(prediction,Y_test);
+PreXtruth = confusionmat(prediction,Y_test);
 % display(PreXtruth);
 save(sprintf('%s.mat',filename))
 rmpath('libsvm-320/matlab');

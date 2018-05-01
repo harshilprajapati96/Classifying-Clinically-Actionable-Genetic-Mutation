@@ -81,6 +81,7 @@ fprintf('%s',filename)
 display(ccr)
 display(traintime)
 display(testtime)
+PreXtruth = confusionmat(prediction,Y_test);
 
 
 % display(boxcon_star_perf)
