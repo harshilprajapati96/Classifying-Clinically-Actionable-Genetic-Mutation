@@ -8,65 +8,18 @@ tic
 Preprocessing_new20;
 disp("Preprocessing is done:")
 toc
-% use data with filtered stoped words
-%% Training woth OVO
-tic
-tuning = 150; % tuning prarmeter for US new is suggested to be 150 at best
-for i_tuning = 1:length(tuning)
-    disp("X_train preperation time:")
-    global alpha
-    tic
-     [X_train_processed,alpha] = RRN_preprocessing(X_train_woSTOP,tuning(i_tuning),length(vocab));
-    %X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
-    toc
-    disp("Training time:")
-    classNames = unique(Y_train);
-    numClasses = length(classNames);
-    inds = cell(numClasses,1); % Preallocation
-    SVMModel = cell(numClasses,1);
-    rng(1); % For reproducibility
-for j = 1:numClasses
-    SVMModel{j} = fitcsvm(X_train_processed,(Y_train==classNames(j)),'ClassNames',[false true],...
-        'Standardize',true,'KernelFunction','rbf','KernelScale','auto');
-end
-for j = 1:numClasses
-    SVMModel{j} = fitPosterior(SVMModel{j});
-end
+boxcon_power = -7:13;
+boxcon = 2.^boxcon_power;
+function_Linear_OVA(X_train_woSTOP,X_test_woSTOP,Y_train,Y_test,boxcon)
 
 
-% tic
-% t = templateSVM('Standardize',1,'KernelFunction','linear');
-% mdl = fitcecoc(X_train_processed(1:5000,:),Y_train(1:5000),'Learners',t);
-% mean(predict(mdl,X_train_processed(1:5000,:))==Y_train(1:5000))
-% % toc
-% 
-% 
-%     tic
-%     [svm_group_ovo, ~] = training_SA_SVM(X_train_processed,Y_train,...
-%         alpha,tuning(i_tuning),'ovo',false);
-%     toc
-end
 
-% star_tuning = 1; % should be set to the best cv-CCR
-[X_test_processed,alpha] = RRN_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
-%X_test_processed = Norm_preprocessing(X_test_woSTOP,length(vocab));
-disp("Decising time:")
-posterior = cell(numClasses,1); 
-tic
-for j = 1:numClasses
-    [~,posterior{j}] = predict(SVMModel{j},X_test_processed);
-    [confidence(j),decision(j)] = max(posterior{j}(:,1));% we care about first one
-end
-toc
-disp("Training for OVA is done:")
-OVAccr = mean(decision==Y_test);
-% prediction = testing_SA_SVM(X_test_processed,svm_group_ovo);
 
-% prediction = mode(prediction,2);
-% ccr = mean(Y_test==prediction);
-% disp("Training for OVO is done:")
-toc
-save('result.mat')
+
+
+
+
+
 % 10 parameters
 % without parfor
 % with most inner parfor
