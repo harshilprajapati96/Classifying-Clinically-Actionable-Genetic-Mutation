@@ -10,12 +10,10 @@ tic
 Preprocessing_new20;
 disp("Preprocessing is done:")
 toc
-% %% toy size
-% howmanytoys = 3;
-% X_train_woSTOP = X_train_woSTOP(1:find(Y_train_expand<howmanytoys+1,1,'last'),:);
-% X_test_woSTOP = X_test_woSTOP(1:find(Y_test_expand<howmanytoys+1,1,'last'),:);
-% Y_train = Y_train(1:find(Y_train<howmanytoys+1,1,'last'));
-% Y_test = Y_test(1:find(Y_test<howmanytoys+1,1,'last'));
+X_train_woSTOP = X_train_woSTOP(ismember(Y_train_expand,[1,20]),:);
+X_test_woSTOP = X_test_woSTOP(ismember(Y_test_expand,[1,20]),:);
+Y_train = Y_train(ismember(Y_train,[1,20]));
+Y_test = Y_test(ismember(Y_test,[1,20]));
 %% use data with filtered stoped words
 % preprocess Further with stop wrods technique
 
@@ -45,7 +43,7 @@ for i = 1:numClasses-1
     end
 end
 disp("Training time:")
-tic
+traintic = tic;
 for j = 1:tot_iter % parfor in the end
     tic
     [X_train_1_2, Y_train_1_2] ...
@@ -57,7 +55,7 @@ for j = 1:tot_iter % parfor in the end
     fprintf("predicting %d pair",j);
     toc
 end
-trainTime = toc;
+trainTime = toc(traintic);
 %% Testing with star_tuning OVO
 star_tuning = 1; % should be set to the best cv-CCR
 [X_test_processed,SA_n] = SA1_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
@@ -80,8 +78,10 @@ finaldecision = mode(decision,2);
 
 testTime = toc;
 
-disp("Training for SASVM_OVO is done:")
+disp("2 classes SASVM_OVO is done:")
 OVOccr = mean(finaldecision==Y_test);
-
-save('SASVM_OVO_fitc.mat')
+display(trainTime)
+display(OVOccr)
+display(testTime)
+save('SASVM_OVO_fitc_2class.mat')
 rmpath('libsvm-3.22/matlab');

@@ -26,12 +26,12 @@ for t_i = 1:numClasses
         = ova(t_i,X_train_processed,Y_train);
     for j = 1:length(boxcon)
         kfold = cvpartition(length(Y_train_1_2),'KFold',5);
-        for i = 1:5 %par
+        parfor i = 1:5 %
 %             svms = svmtrain(X_train_1_2(training(kfold,i),:),Y_train_1_2(training(kfold,i),:),...
 %                 'boxconstraint',boxcon(j)*ones(kfold.TrainSize(i),1),...
 %                 'autoscale','false','kernel_function','linear','kernelcachelimit',inf);
             svms = svmtrain(Y_train_1_2(training(kfold,i),:),X_train_1_2(training(kfold,i),:),...
-                sprintf('-c %f -t 0 -m inf',boxcon(j)));
+                sprintf('-c %f -t 0 -m inf -h 0',boxcon(j)));
             svm_ccr(j,i) = mean(Y_train_1_2(test(kfold,i),:)==...
                 svmpredict(Y_train_1_2(test(kfold,i),:),X_train_1_2(test(kfold,i),:),svms,''));
 %             svm_ccr(j,i) = mean(svmclassify(svms,X_train_1_2(test(kfold,i),:))...
@@ -53,7 +53,7 @@ parfor j = 1:numClasses
         = ova(j,X_train_processed,Y_train);
 %     svms{j} = svmtrain(X_train_1_2,Y_train_1_2,'boxconstraint',boxcon_star(j),...
 %         'autoscale','false','kernel_function','Linear','kernelcachelimit',inf);
-    svms{j} = svmtrain(Y_train_1_2,X_train_1_2,sprintf('-c %f -t 0 -b 1 -m inf',boxcon_star(j)));
+    svms{j} = svmtrain(Y_train_1_2,X_train_1_2,sprintf('-c %f -t 0 -b 1 -m inf -h 0',boxcon_star(j)));
 end
 train_time = toc;
 % [~,~,docIDreorder_test] = unique(X_test(:,1));

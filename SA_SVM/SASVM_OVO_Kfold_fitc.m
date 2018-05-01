@@ -74,7 +74,7 @@ finaldecision = mode(decision,2);
 
 toc
 disp("Training for OVO is done:")
-OV0ccr = mean(finaldecision==Y_test);
+OVOccr = mean(finaldecision==Y_test);
 
 toc
 save('result_OVO.mat')
