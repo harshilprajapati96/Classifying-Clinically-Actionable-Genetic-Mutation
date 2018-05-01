@@ -5,8 +5,8 @@
 %% News 20 group
 % preprocessing
 % tic
-% Preprocessing_new20;
-% disp("Preprocessing is done:")
+Preprocessing_new20;
+disp("Preprocessing is done:")
 % toc
 % boxcon_power = -7:13;
 % boxcon = 2.^boxcon_power;
@@ -21,7 +21,7 @@ load('../Cancer_Detection_Data/Train_Data_Cancer.mat');
 load('../Cancer_Detection_Data/Train_Label_Cancer.mat');
 load('../Cancer_Detection_Data/Test_Data_Cancer.mat');
 load('../Cancer_Detection_Data/Test_Label_Cancer');
-disp("Preprocessing is done:")
+vocab = textread('../Cancer_Detection_Data/vocabulary.txt','%s');
 toc
 boxcon_power = -7:13;
 boxcon = 2.^boxcon_power;
