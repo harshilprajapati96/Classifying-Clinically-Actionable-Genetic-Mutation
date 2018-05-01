@@ -7,7 +7,7 @@ function function_rbf_OVA(X_train_woSTOP,X_test_woSTOP,Y_train,Y_test,vocab,boxc
 
 X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
 
-addpath('libsvm-320/matlab');
+addpath('libsvm-3.22/matlab');
 
 X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
 disp("Preprocessing is done:")
@@ -91,4 +91,4 @@ display(ccr)
 PreXtruth = confusionmat(prediction,Y_test);
 
 save(sprintf('%s.mat',filename))
-rmpath('libsvm-320/matlab');
+rmpath('libsvm-3.22/matlab');
