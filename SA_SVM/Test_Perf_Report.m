@@ -17,16 +17,17 @@ disp("Preprocessing is done:")
 % preprocessing
 clear all
 tic
-load('../Cancer_Detection_Data/Train_Data_Cancer.mat');
-load('../Cancer_Detection_Data/Train_Label_Cancer.mat');
-load('../Cancer_Detection_Data/Test_Data_Cancer.mat');
-load('../Cancer_Detection_Data/Test_Label_Cancer');
-vocab = textread('../Cancer_Detection_Data/vocabulary.txt','%s');
+load('../Cancer_Detection_Data_Decreased_Vocab_Size/Train_Data_Cancer_Filtered_LeastFreq_Words.mat');
+load('../Cancer_Detection_Data_Decreased_Vocab_Size/Train_Label_Cancer.mat');
+load('../Cancer_Detection_Data_Decreased_Vocab_Size/Test_Data_Cancer_Filtered_LeastFreq_Words.mat');
+load('../Cancer_Detection_Data_Decreased_Vocab_Size/Test_Label_Cancer');
+vocab = importdata('../Cancer_Detection_Data_Decreased_Vocab_Size/vocabulary_Filtered_LeastFreq_Words.txt');
 toc
 boxcon_power = -7:13;
 boxcon = 2.^boxcon_power;
 filename = "Clinc_linear_OVA";
-function_linear_OVA(train_data_cancer,test_data_cancer,Train_Label_Cancer,Test_Label_Cancer,vocab,boxcon,filename)
+function_linear_OVA(train_data_cancer,test_data_cancer,Train_Label_Cancer,...
+    Test_Label_Cancer,vocab,boxcon,filename)
 
 
 
