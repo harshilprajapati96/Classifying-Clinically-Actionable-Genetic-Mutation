@@ -4,7 +4,7 @@
 
 %% preprocessing
 function function_linear_OVO(X_train_woSTOP,X_test_woSTOP,Y_train,Y_test,vocab,boxcon,filename)
-
+addpath('libsvm-320/matlab');
 X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
 disp("Preprocessing is done:")
 
@@ -31,14 +31,14 @@ for t_i = 1:tot_iter
         = ovo(pair_i(t_i),pair_j(t_i),X_train_processed,Y_train);
     for j = 1:length(boxcon)
         kfold = cvpartition(length(Y_train_1_2),'KFold',5);
-        for i = 1:5
+        parfor i = 1:5
 %             svms = svmtrain(X_train_1_2(training(kfold,i),:),Y_train_1_2(training(kfold,i),:),...
 %                 'boxconstraint',boxcon(j)*ones(kfold.TrainSize(i),1),...
 %                 'autoscale','false','kernel_function','linear');
 %             svm_ccr(j,i) = mean(svmclassify(svms,X_train_1_2(test(kfold,i),:))...
 %                 ==Y_train_1_2(test(kfold,i),:));
             svms = svmtrain(Y_train_1_2(training(kfold,i),:),X_train_1_2(training(kfold,i),:),...
-                sprintf('-c %f -t 0 -m inf -h 0',boxcon(j)));
+                sprintf('-c %f -t 0 -m inf -h 0 -q',boxcon(j)));
             svm_ccr(j,i) = mean(Y_train_1_2(test(kfold,i),:)==...
                 svmpredict(Y_train_1_2(test(kfold,i),:),X_train_1_2(test(kfold,i),:),svms,''));
         end
@@ -64,9 +64,7 @@ parfor j = 1:tot_iter
 
 end
 traintime = toc(traintic);
-[~,~,docIDreorder_test] = unique(X_test(:,1));
-X_test = sparse(docIDreorder_test,X_test(:,2),...
-    X_test(:,3),length(Y_test),length(vocab));
+X_test = Norm_preprocessing(X_test_woSTOP,length(vocab));
 testtic = tic;
 prediction_prob = zeros(length(Y_test),length(svms));
 parfor i = 1:length(svms)
@@ -79,14 +77,16 @@ prediction = mode(prediction_prob,2);
 ccr = mean(prediction==Y_test);
 
 testtime = toc(testtic);
-disp('Linear_kfold')
+fprintf('%s',filename)
 display(ccr)
 display(traintime)
 display(testtime)
+
+
 % display(boxcon_star_perf)
 % PreXtruth = confusionmat(prediction,Y_test);
 % display(PreXtruth);
-save('Linear_kfold.mat')
-rmpath('libsvm-3.22/matlab');
+save(sprintf('%s.mat',filename))
+rmpath('libsvm-320/matlab');
 end
 
