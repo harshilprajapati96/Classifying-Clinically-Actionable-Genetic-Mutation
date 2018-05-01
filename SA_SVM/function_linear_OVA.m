@@ -8,7 +8,7 @@ X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
 disp("Preprocessing is done:")
 
 
-addpath('libsvm-3.22/matlab');
+% addpath('libsvm-3.22/matlab');
 %% Finding Best sigma and Box constant
 classNames = unique(Y_train);
 numClasses = length(classNames);
@@ -22,6 +22,8 @@ svm_ccr = zeros(length(boxcon),5);
 warning('off','all')
 warning
 for t_i = 1:numClasses
+    disp('a class')
+    tic
     [X_train_1_2, Y_train_1_2] ...
         = ova(t_i,X_train_processed,Y_train);
     for j = 1:length(boxcon)
@@ -42,6 +44,7 @@ for t_i = 1:numClasses
     %% Selecting Best sigma and Box constant
     [boxcon_star_perf(t_i),boxcon_star_ind] = max(cv_ccr);
     boxcon_star(t_i) = boxcon(boxcon_star_ind);
+    toc
 end
 %% actual Training with Star sigma and boxconstant
 tic
@@ -49,11 +52,14 @@ warning('off','all')
 warning
 svms = cell(numClasses,1);
 parfor j = 1:numClasses
+    disp('a class')
+    tic
     [X_train_1_2, Y_train_1_2] ...
-        = ova(j,X_train_processed,Y_train);
+        = ovo(j,2,X_train_processed,Y_train);
 %     svms{j} = svmtrain(X_train_1_2,Y_train_1_2,'boxconstraint',boxcon_star(j),...
 %         'autoscale','false','kernel_function','Linear','kernelcachelimit',inf);
-    svms{j} = svmtrain(Y_train_1_2,X_train_1_2,sprintf('-c %f -t 0 -b 1 -m inf -h 0',boxcon_star(j)));
+    svms{j} = svmtrain(Y_train_1_2,X_train_1_2,sprintf('-c %f -t 2 -b 1 -m inf -h 0',1));
+toc
 end
 train_time = toc;
 % [~,~,docIDreorder_test] = unique(X_test(:,1));
@@ -62,7 +68,7 @@ train_time = toc;
 X_test = Norm_preprocessing(X_test_woSTOP,length(vocab));
 tic
 prediction_prob = zeros(length(Y_test),length(svms));
-parfor i = 1:length(svms)
+for i = 1:length(svms)
 %     prediction(:,i) = svmclassify(svms{i},X_test);
 [~,~,p] = svmpredict(Y_test, X_test, svms{i}, '-b 1');
     prediction_prob(:,i) = p(:,svms{i}.Label==1);    %# probability of class==k

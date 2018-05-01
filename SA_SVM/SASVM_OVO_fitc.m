@@ -14,6 +14,8 @@ X_train_woSTOP = X_train_woSTOP(ismember(Y_train_expand,[1,20]),:);
 X_test_woSTOP = X_test_woSTOP(ismember(Y_test_expand,[1,20]),:);
 Y_train = Y_train(ismember(Y_train,[1,20]));
 Y_test = Y_test(ismember(Y_test,[1,20]));
+Y_train(Y_train==20) =2;
+Y_test(Y_test==20) =2;
 %% use data with filtered stoped words
 % preprocess Further with stop wrods technique
 
@@ -48,7 +50,8 @@ for j = 1:tot_iter % parfor in the end
     tic
     [X_train_1_2, Y_train_1_2] ...
         = ovo(pair_i(j),pair_j(j),X_train_processed,Y_train);
-    K =  [ (1:size(X_train_1_2,1))' , sensing1kernal(X_train_1_2,X_train_1_2) ];
+    X_train_prime_1_2 = ~(X_train_1_2);
+    K =  [ (1:size(X_train_1_2,1))' , sensing1kernal(X_train_1_2,X_train_prime_1_2) ];
 %     SVMModel{j} = fitcsvm(X_train_1_2,Y_train_1_2,...
 %         'KernelFunction','sensing2kernal');
     SVMModel{j} = svmtrain(Y_train_1_2,K,'-t 4');
@@ -60,12 +63,12 @@ trainTime = toc(traintic);
 star_tuning = 1; % should be set to the best cv-CCR
 [X_test_processed,SA_n] = SA1_preprocessing(X_test_woSTOP,tuning(star_tuning),length(vocab));
 % X_test_processed = full(Norm_preprocessing(X_test_woSTOP,length(vocab)));
-
+X_test_prime_processed = ~(X_test_processed);
 disp("Testing time:")
 n = size(X_test_processed,1);
 decision = zeros(n,tot_iter);
 tic
-     KK =  [ (1:size(X_test_processed,1))' , sensing1kernal(X_test_processed,X_test_processed) ];
+     KK =  [ (1:size(X_test_processed,1))' , sensing1kernal(X_test_processed,X_test_prime_processed) ];
 
 for j = 1:tot_iter
 

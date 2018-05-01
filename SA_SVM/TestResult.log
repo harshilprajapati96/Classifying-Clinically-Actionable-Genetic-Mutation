@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.9.15)  29 APR 2018 07:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.9.15)  1 MAY 2018 11:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -259,23 +259,24 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \c@lstlisting=\count117
-LaTeX Font Info:    Try loading font information for U+msa on input line 72.
+LaTeX Font Info:    Try loading font information for U+msa on input line 73.
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 72.
+LaTeX Font Info:    Try loading font information for U+msb on input line 73.
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/usr/local/texlive/2017basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+{/usr/local/texlive/2017basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
+]
 (/Users/bowensong/Google Drive/EC503Project/Classifying-Clinically-Actionable-G
 enetic-Mutation/SA_SVM/TestResult.aux) ) 
 Here is how much of TeX's memory you used:
- 4552 strings out of 494437
- 64270 string characters out of 6166645
- 187505 words of memory out of 5000000
- 7824 multiletter control sequences out of 15000+600000
+ 4555 strings out of 494437
+ 64328 string characters out of 6166645
+ 188505 words of memory out of 5000000
+ 7827 multiletter control sequences out of 15000+600000
  9192 words of font info for 35 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  39i,7n,40p,423b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -285,11 +286,11 @@ t/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2017basic/texmf
 exmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2017bas
 ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
 Output written on "/Users/bowensong/Google Drive/EC503Project/Classifying-Clini
-cally-Actionable-Genetic-Mutation/SA_SVM/TestResult.pdf" (1 page, 36993 bytes).
-
+cally-Actionable-Genetic-Mutation/SA_SVM/TestResult.pdf" (2 pages, 41830 bytes)
+.
 PDF statistics:
- 24 PDF objects out of 1000 (max. 8388607)
- 16 compressed objects within 1 object stream
+ 27 PDF objects out of 1000 (max. 8388607)
+ 18 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
