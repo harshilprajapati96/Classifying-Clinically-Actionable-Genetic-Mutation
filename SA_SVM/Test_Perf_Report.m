@@ -10,7 +10,7 @@ disp("Preprocessing is done:")
 toc
 boxcon_power = -7:13;
 boxcon = 2.^boxcon_power;
-function_linear_OVA(X_train_woSTOP,X_test_woSTOP,Y_train,Y_test,boxcon)
+function_linear_OVA(X_train_woSTOP,X_test_woSTOP,Y_train,Y_test,vocab,boxcon)
 
 
 
