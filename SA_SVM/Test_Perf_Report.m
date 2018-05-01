@@ -26,7 +26,7 @@ toc
 boxcon_power = -7:13;
 boxcon = 2.^boxcon_power;
 filename = "Clinc_linear_OVA";
-function_linear_OVA(X_train_woSTOP,X_test_woSTOP,Y_train,Y_test,vocab,boxcon,filename)
+function_linear_OVA(train_data_cancer,test_data_cancer,Train_Label_Cancer,Test_Label_Cancer,vocab,boxcon,filename)
 
 
 
