@@ -1,7 +1,7 @@
 %% %% SVM Classifier for Text Document
 % MATLAB R2017b
 % Bowen Song U04079758
-casenumber = input('Enter a number: ');
+% casenumber = input('Enter a number: ');
 %
 % switch casenumber
 %     case 1
