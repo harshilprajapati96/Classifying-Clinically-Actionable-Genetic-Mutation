@@ -4,13 +4,29 @@
 
 %% News 20 group
 % preprocessing
+% tic
+% Preprocessing_new20;
+% disp("Preprocessing is done:")
+% toc
+% boxcon_power = -7:13;
+% boxcon = 2.^boxcon_power;
+% filename = "USnews_linear_OVA";
+% function_linear_OVA(X_train_woSTOP,X_test_woSTOP,Y_train,Y_test,vocab,boxcon,filename)
+
+%% Clinc result
+% preprocessing
+clear all
 tic
-Preprocessing_new20;
+load('../Cancer_Detection_Data/Train_Data_Cancer.mat');
+load('../Cancer_Detection_Data/Train_Label_Cancer.mat');
+load('../Cancer_Detection_Data/Test_Data_Cancer.mat');
+load('../Cancer_Detection_Data/Test_Label_Cancer');
 disp("Preprocessing is done:")
 toc
 boxcon_power = -7:13;
 boxcon = 2.^boxcon_power;
-function_linear_OVA(X_train_woSTOP,X_test_woSTOP,Y_train,Y_test,vocab,boxcon)
+filename = "Clinc_linear_OVA";
+function_linear_OVA(X_train_woSTOP,X_test_woSTOP,Y_train,Y_test,vocab,boxcon,filename)
 
 
 

@@ -3,7 +3,7 @@
 % Bowen Song U04079758
 
 
-function function_linear_OVA(X_train_woSTOP,X_test_woSTOP,Y_train,Y_test,vocab,boxcon)
+function function_linear_OVA(X_train_woSTOP,X_test_woSTOP,Y_train,Y_test,vocab,boxcon,filename)
 X_train_processed = Norm_preprocessing(X_train_woSTOP,length(vocab));
 disp("Preprocessing is done:")
 
